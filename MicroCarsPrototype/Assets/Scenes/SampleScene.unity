@@ -121,8 +121,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 32853502}
-  - component: {fileID: 32853503}
   - component: {fileID: 32853504}
+  - component: {fileID: 32853503}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -142,6 +142,7 @@ Transform:
   m_Children:
   - {fileID: 1013195203}
   - {fileID: 142547639}
+  - {fileID: 428786088}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
@@ -301,6 +302,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1295603765}
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   - eventID: 5
     callback:
       m_PersistentCalls:
@@ -346,23 +364,6 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  - eventID: 2
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1295603765}
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
-        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
 --- !u!114 &55186363
 MonoBehaviour:
@@ -375,8 +376,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07458a0e19c329c499ed110f79ed4948, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 32853502}
+  car: {fileID: 1013195203}
+  ghostAimer: {fileID: 142547639}
   aimDirectionAsset: {fileID: 1295603766}
-  car: {fileID: 32853502}
   defaultPosition: {x: 0, y: -0.5}
 --- !u!1 &142547637
 GameObject:
@@ -446,11 +449,10 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 142547637}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 428786088}
+  m_Children: []
   m_Father: {fileID: 32853502}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -528,7 +530,7 @@ GameObject:
   - component: {fileID: 428786090}
   - component: {fileID: 428786089}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Aimer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -546,8 +548,8 @@ RectTransform:
   m_Children:
   - {fileID: 55186358}
   - {fileID: 1295603766}
-  m_Father: {fileID: 142547639}
-  m_RootOrder: 0
+  m_Father: {fileID: 32853502}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3945,7 +3947,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1295603766
 Transform:
   m_ObjectHideFlags: 0
