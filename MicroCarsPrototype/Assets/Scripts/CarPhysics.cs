@@ -7,7 +7,7 @@ public class CarPhysics : MonoBehaviour {
     private const float minMovingSpeed = 0.01f;
 
     private bool isMoving = false;
-    private float carSpeed = 0;
+    public float carSpeed = 0;
     private Rigidbody2D rb2D;
 
     private void Start()
@@ -18,7 +18,7 @@ public class CarPhysics : MonoBehaviour {
     void Move(float moveForce)
     {
 
-        Vector2 moveForceVector = new Vector2(0.0f, moveForce);
+        Vector2 moveForceVector = new Vector2(0.0f, moveForce * carSpeed);
         rb2D.AddRelativeForce(moveForceVector);
     }
 

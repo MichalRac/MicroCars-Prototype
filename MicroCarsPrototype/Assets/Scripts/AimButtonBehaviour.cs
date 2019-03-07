@@ -9,6 +9,7 @@ public class AimButtonBehaviour : MonoBehaviour {
     private Vector2 touchPoint;
     private Vector2 localPos;
     private Transform aimButton;
+    private float aimPower;
 
     public Transform player;
     public Transform car;
@@ -70,5 +71,12 @@ public class AimButtonBehaviour : MonoBehaviour {
         player.rotation = ghostAimer.rotation;
         ghostAimer.localRotation = car.localRotation = reset;
 
+    }
+
+    //TODO
+    public float calculateSpeed()
+    {
+
+        return 0;
     }
 }
