@@ -9,6 +9,7 @@ public class AimButtonBehaviour : MonoBehaviour {
     private Vector2 touchPoint;
     private Vector2 localPos;
     private Transform aimButton;
+    private float aimPower;
 
     public Transform player;
     public Transform car;
@@ -42,7 +43,7 @@ public class AimButtonBehaviour : MonoBehaviour {
         //Setting the aim arrow to the opposite of aim button
         aimDirectionAsset.localPosition = -aimButton.localPosition;
 
-        // Calculating rotation we want towards which we aim
+        // Calculating rotation towards which we aim
         Vector2 direction = aimButton.localPosition - car.localPosition;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 90;
         Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
@@ -60,10 +61,22 @@ public class AimButtonBehaviour : MonoBehaviour {
 
     public void resetPosition()
     {
+        Quaternion reset = new Quaternion(0.0f, 0.0f, 0.0f, 0.0f);
 
         //Reseting the aim assets after input ends
         aimButton.localPosition = defaultPosition;
         aimDirectionAsset.localPosition = -defaultPosition;
-        ghostAimer.localPosition = player.position;
+        ghostAimer.localPosition = Vector2.zero;
+
+        player.rotation = ghostAimer.rotation;
+        ghostAimer.localRotation = car.localRotation = reset;
+
+    }
+
+    //TODO
+    public float calculateSpeed()
+    {
+
+        return 0;
     }
 }
