@@ -8,6 +8,7 @@ public class CameraController : MonoBehaviour {
     protected Transform cameraPoint;
     protected Vector2 focusPoint;
     private Quaternion nextRotation;
+    public float cameraRotationSpeed;
 
 	// Use this for initialization
 	void Start () {
@@ -18,11 +19,10 @@ public class CameraController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        /*
+
         focusPoint = target.transform.position;
         cameraPoint.position = new Vector3(focusPoint.x, focusPoint.y, -10.0f);
-        cameraPoint.rotation = target.transform.rotation;
-        */
+
         
 	}
 
@@ -34,9 +34,9 @@ public class CameraController : MonoBehaviour {
     IEnumerator slowlyFixRotation()
     {
         nextRotation = target.transform.rotation;
-        while (Quaternion.Angle(cameraPoint.rotation, target.transform.rotation) > 1.0f)
+        while (Quaternion.Angle(cameraPoint.rotation, target.transform.rotation) > 0.001f)
         {
-            cameraPoint.rotation = Quaternion.RotateTowards(cameraPoint.rotation, nextRotation, 0.5f);
+            cameraPoint.rotation = Quaternion.RotateTowards(cameraPoint.rotation, nextRotation, cameraRotationSpeed);
             yield return null;
         }
         
