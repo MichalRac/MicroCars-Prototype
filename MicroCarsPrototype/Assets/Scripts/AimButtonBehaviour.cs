@@ -14,8 +14,11 @@ public class AimButtonBehaviour : MonoBehaviour {
     public Transform player;
     public Transform car;
     public Transform ghostAimer;
+    public CarPhysics carPhysics;
     public Transform aimDirectionAsset;
     public Vector2 defaultPosition;
+    public float carSpeed;
+    public Text text;
 
 
     // Use this for initialization
@@ -26,8 +29,6 @@ public class AimButtonBehaviour : MonoBehaviour {
 	}
 	
 
-
-	// Update is called once per frame
 	public void moveAimButtonToTouchPosition ()
     {
         //Finding input position and moving the aim button there
@@ -40,7 +41,7 @@ public class AimButtonBehaviour : MonoBehaviour {
     // TODO: Make it so that holding button on either side of the screen slowly rotates the view
     public void moveDirectionArrow()
     {
-        //Setting the aim arrow to the opposite of aim button
+        //Setting the aim direction arrow to the opposite of aim button
         aimDirectionAsset.localPosition = -aimButton.localPosition;
 
         // Calculating rotation towards which we aim
@@ -55,6 +56,9 @@ public class AimButtonBehaviour : MonoBehaviour {
         //TODO: find if there is a more efficient way to set up ghost car position
         ghostAimer.localPosition = aimButton.localPosition;
         ghostAimer.position = Vector2.MoveTowards(ghostAimer.position, player.position, 0.5f);
+
+        text.text = calculatePower().ToString();
+
 
 
     }
@@ -74,9 +78,14 @@ public class AimButtonBehaviour : MonoBehaviour {
     }
 
     //TODO
-    public float calculateSpeed()
+    public float calculatePower()
     {
+        aimPower = Vector2.Distance(aimButton.position, player.transform.position);
+        return aimPower;
+    }
 
-        return 0;
+    public void startMoving()
+    {
+        carPhysics.Move(calculatePower());
     }
 }

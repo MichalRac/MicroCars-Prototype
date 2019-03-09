@@ -15,9 +15,10 @@ public class CarPhysics : MonoBehaviour {
         rb2D = GetComponent<Rigidbody2D>();
     }
 
-    void Move(float moveForce)
+    public void Move(float moveForce)
     {
 
+        rb2D.velocity.Set(0, 0);
         Vector2 moveForceVector = new Vector2(0.0f, moveForce * carSpeed);
         rb2D.AddRelativeForce(moveForceVector);
     }
