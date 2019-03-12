@@ -59,22 +59,26 @@ public class AimButtonBehaviour : MonoBehaviour {
 
         text.text = calculatePower().ToString();
 
-
-
     }
 
     public void resetPosition()
     {
-        Quaternion reset = new Quaternion(0.0f, 0.0f, 0.0f, 0.0f);
 
         //Reseting the aim assets after input ends
         aimButton.localPosition = defaultPosition;
         aimDirectionAsset.localPosition = -defaultPosition;
         ghostAimer.localPosition = Vector2.zero;
+        
+    }
 
-        player.rotation = ghostAimer.rotation;
-        ghostAimer.localRotation = car.localRotation = reset;
+    public void resetRotation()
+    {
+        Quaternion tagetRotation = ghostAimer.rotation;
+        Quaternion reset = new Quaternion(0.0f, 0.0f, 0.0f, 0.0f);
 
+        ghostAimer.localRotation = reset;
+        car.localRotation = reset;
+        player.rotation = tagetRotation;
     }
 
     //TODO
@@ -86,6 +90,15 @@ public class AimButtonBehaviour : MonoBehaviour {
 
     public void startMoving()
     {
-        carPhysics.Move(calculatePower());
+        resetRotation();
+        StartCoroutine(moveNextFrame());
+        
     }
+    public IEnumerator moveNextFrame()
+    {
+        yield return null;
+        carPhysics.Move(calculatePower());
+        resetPosition();
+    }
+
 }
