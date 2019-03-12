@@ -158,7 +158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0caa46d3fdf3485459b476bc94adb877, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  carSpeed: 500
+  carSpeed: 250
 --- !u!50 &32853504
 Rigidbody2D:
   serializedVersion: 4
@@ -172,7 +172,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 1.5
-  m_AngularDrag: 0.05
+  m_AngularDrag: 1
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
@@ -380,7 +380,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
         - m_Target: {fileID: 55186363}
-          m_MethodName: resetPosition
+          m_MethodName: startMoving
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -392,17 +392,6 @@ MonoBehaviour:
           m_CallState: 2
         - m_Target: {fileID: 519420030}
           m_MethodName: fixCamera
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 55186363}
-          m_MethodName: startMoving
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -432,7 +421,7 @@ MonoBehaviour:
   carPhysics: {fileID: 32853503}
   aimDirectionAsset: {fileID: 1295603766}
   defaultPosition: {x: 0, y: -0.5}
-  carSpeed: 10
+  carSpeed: 2
   text: {fileID: 1336524332}
 --- !u!1 &142547637
 GameObject:
