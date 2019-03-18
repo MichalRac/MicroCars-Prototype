@@ -24,6 +24,18 @@ public class CarPhysics : MonoBehaviour {
     }
 
 
+    public void SwipeAction(string direction)
+    {
+        if (direction == "left")
+        {
+
+        }
+        else if (direction == "right")
+        {
+
+        }
+    }
+
     private void Update()
     {
         if(Input.GetButton("Jump")){
