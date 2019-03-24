@@ -7,7 +7,8 @@ public class CarPhysics : MonoBehaviour {
     private const float minMovingSpeed = 0.01f;
 
     private bool isMoving = false;
-    public float carSpeed = 0;
+    public float carSpeed = 0.0f;
+    public float turnDegrees = 5.0f;
     private Rigidbody2D rb2D;
 
     private void Start()
@@ -24,11 +25,43 @@ public class CarPhysics : MonoBehaviour {
     }
 
 
+    public void SwipeAction(string direction)
+    {
+        
+        if (direction == "left")
+        {
+            rb2D.AddTorque(turnDegrees);
+            StartCoroutine("maintainVelocityRotation");
+        }
+        else if (direction == "right")
+        {
+
+            rb2D.AddTorque(-turnDegrees);
+            StartCoroutine("maintainVelocityRotation");
+            //Quaternion rotation = new Quaternion(0.0f, 0.0f, rb2D.transform.rotation.z - turnDegrees, 0.0f);
+            //Debug.Log(rb2D.transform.rotation.z - turnDegrees);
+            //rb2D.transform.rotation = rotation;
+        }
+    }
+
     private void Update()
     {
         if(Input.GetButton("Jump")){
             Move(10);
         }
 
+    }
+
+    public IEnumerator maintainVelocityRotation()
+    {
+        while(rb2D.velocity.magnitude > minMovingSpeed)
+        {
+
+            Vector3 velocity = rb2D.velocity;
+            rb2D.velocity = rb2D.transform.up * velocity.magnitude;
+            //rb2D.velocity = transform.forward * velocity.magnitude;
+            yield return new WaitForFixedUpdate();
+        }
+        
     }
 }
