@@ -4464,6 +4464,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1963401058}
   - component: {fileID: 1963401059}
+  - component: {fileID: 1963401060}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -4495,3 +4496,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98498814169e7234da5ccbaeb66efb7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1963401060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1963401057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08baa3d19a3754108af85534c7824251, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TreatMousePointerAsFinger: 1
+  SimulateMouseWithTouches: 0
+  RequireControlKeyForMouseZoom: 1
+  PassThroughObjects: []
+  DefaultDPI: 200
+  LevelUnloadOption: 2

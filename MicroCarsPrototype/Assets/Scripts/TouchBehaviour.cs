@@ -6,7 +6,7 @@ namespace DigitalRubyShared
 {
     public class TouchBehaviour : MonoBehaviour
     {
-
+        public CarPhysics carPhysics;
         private SwipeGestureRecognizer swipeGesture;
         private readonly List<Vector3> swipeLines = new List<Vector3>();
 
@@ -48,6 +48,8 @@ namespace DigitalRubyShared
             {
 
                 Debug.Log("SwipedLeft");
+                carPhysics.SwipeAction("left");
+                
                 //HandleSwipe(gesture.FocusX, gesture.FocusY);
                 //DebugText("Swiped from {0},{1} to {2},{3}; velocity: {4}, {5}", gesture.StartFocusX, gesture.StartFocusY, gesture.FocusX, gesture.FocusY, swipeGesture.VelocityX, swipeGesture.VelocityY);
             }
@@ -58,6 +60,7 @@ namespace DigitalRubyShared
             if (gesture.State == GestureRecognizerState.Ended)
             {
                 Debug.Log("SwipedRight");
+                carPhysics.SwipeAction("right");
                 //HandleSwipe(gesture.FocusX, gesture.FocusY);
                 //DebugText("Swiped from {0},{1} to {2},{3}; velocity: {4}, {5}", gesture.StartFocusX, gesture.StartFocusY, gesture.FocusX, gesture.FocusY, swipeGesture.VelocityX, swipeGesture.VelocityY);
             }
