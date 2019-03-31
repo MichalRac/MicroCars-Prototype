@@ -162,6 +162,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carSpeed: 150
   turnPower: 10
+  deltaDragPower: 1
+  deltaDragTime: 0.5
+  firstSlowTime: 0.5
   gameController: {fileID: 1963401061}
 --- !u!50 &32853504
 Rigidbody2D:

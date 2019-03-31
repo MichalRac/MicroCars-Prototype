@@ -9,8 +9,12 @@ public class CarPhysics : MonoBehaviour {
     private bool isMoving = false;
     public float carSpeed = 0.0f;
     public float turnPower = 5.0f;
-    private Rigidbody2D rb2D;
 
+    public float deltaDragPower = 0.5f;
+    public float deltaDragTime = 0.5f;
+    public float firstSlowTime = 0.5f;
+
+    private Rigidbody2D rb2D;
     public GameController gameController;
 
 
@@ -21,12 +25,27 @@ public class CarPhysics : MonoBehaviour {
 
     public void Move(float moveForce)
     {
-
-
         Vector2 moveForceVector = new Vector2(0.0f, moveForce * carSpeed);
         rb2D.AddRelativeForce(moveForceVector);
+        StartCoroutine("startDynamicDrag");
     }
 
+    public IEnumerator startDynamicDrag()
+    {
+        float defaultDrag = rb2D.drag;
+        rb2D.drag = 0;
+
+        yield return null;  //Waiting for the velocity to apply
+        yield return new WaitForSeconds(firstSlowTime);
+        while (rb2D.velocity.magnitude >= minMovingSpeed)
+        {
+            Debug.Log("Did it even work?");
+            yield return new WaitForSeconds(deltaDragTime);
+            rb2D.drag += deltaDragPower;
+        }
+        rb2D.drag = defaultDrag;
+        
+    }
 
     public void SwipeAction(string direction)
     {
