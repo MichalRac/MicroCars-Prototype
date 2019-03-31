@@ -8,7 +8,7 @@ public class CarPhysics : MonoBehaviour {
 
     private bool isMoving = false;
     public float carSpeed = 0.0f;
-    public float turnDegrees = 5.0f;
+    public float turnPower = 5.0f;
     private Rigidbody2D rb2D;
 
     private void Start()
@@ -30,13 +30,13 @@ public class CarPhysics : MonoBehaviour {
         
         if (direction == "left")
         {
-            rb2D.AddTorque(turnDegrees);
+            rb2D.AddTorque(turnPower);
             StartCoroutine("maintainVelocityRotation");
         }
         else if (direction == "right")
         {
 
-            rb2D.AddTorque(-turnDegrees);
+            rb2D.AddTorque(-turnPower);
             StartCoroutine("maintainVelocityRotation");
             //Quaternion rotation = new Quaternion(0.0f, 0.0f, rb2D.transform.rotation.z - turnDegrees, 0.0f);
             //Debug.Log(rb2D.transform.rotation.z - turnDegrees);
@@ -47,7 +47,7 @@ public class CarPhysics : MonoBehaviour {
     private void Update()
     {
         if(Input.GetButton("Jump")){
-            Move(10);
+            Move(carSpeed);
         }
 
     }
