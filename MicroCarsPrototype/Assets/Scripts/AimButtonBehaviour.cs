@@ -8,7 +8,6 @@ public class AimButtonBehaviour : MonoBehaviour {
     //this gameobject's transform reference
     private Transform aimButton;
 
-    // GameObjects affected by this script
     [Header("Referenced GameObjects")]
     public Transform player;
     public Transform car;
@@ -16,23 +15,26 @@ public class AimButtonBehaviour : MonoBehaviour {
     public Transform aimDirectionAsset;
     public Text aimPowerValueText;
 
-    // Outside scripts referenced
     [Header("Referenced Scripts")]
     public CarPhysics carPhysics;
     public CameraController cameraController;
 
-    // For defining default position of button
-    [Header("Default Button Position")]
+
+    [Header("Default AimButton Position")]
     public Vector2 defaultButtonPosition;
 
+    /// <summary>
+    /// This script is responsible for Aiming System, together with Player GameObject which is being aimed, and GameController, which is responsible
+    /// for deciding when we can actually aim.
+    /// </summary>
 
-
-
-    void Start ()
+    private void Awake()
     {
         aimButton = GetComponent<Transform>();
-	}
+    }
 
+
+    // Utility methods
 
     public void resetPosition()
     {
@@ -41,7 +43,6 @@ public class AimButtonBehaviour : MonoBehaviour {
         aimDirectionAsset.localPosition = -defaultButtonPosition;
         ghostCar.localPosition = Vector2.zero;
     }
-
 
     public void resetRotation()
     {
@@ -55,38 +56,28 @@ public class AimButtonBehaviour : MonoBehaviour {
         cameraController.fixCamera();
     }
 
-
     public float calculatePower()
     {
         float aimPower = Vector2.Distance(aimButton.position, player.transform.position);
         return aimPower;
     }
 
-
-    public void onAimRelease()
-    {
-        resetRotation();
-
-        //Since the resetRotation() didn't apply fast enough, I had to delay the actual movement until next frame
-        //TODO: Try to make this work without the need of coroutine
-        StartCoroutine(moveNextFrame());
-    }
-
-
     public void hideAimAssets()
     {
+        
         aimDirectionAsset.gameObject.SetActive(false);
         ghostCar.gameObject.SetActive(false);
     }
 
-
-    public IEnumerator moveNextFrame()
+    public void showAimButton()
     {
-        yield return null;
-        carPhysics.Move(calculatePower());
-        resetPosition();
+        Debug.Log("Showing AimButton");
+        aimButton.gameObject.SetActive(true);
     }
 
+
+    
+    // Two methods below are used by event system when AimButton is held down (event system)
 
     public void moveAimButtonToTouchPosition ()
     {
@@ -95,7 +86,6 @@ public class AimButtonBehaviour : MonoBehaviour {
         aimButton.position = touchPoint;
         moveDirectionArrow();
 	}
-
 
     // TODO: Make it so that holding button on either side of the screen slowly rotates the view
     public void moveDirectionArrow()
@@ -121,11 +111,35 @@ public class AimButtonBehaviour : MonoBehaviour {
         ghostCar.position = Vector2.MoveTowards(ghostCar.position, player.position, 0.5f);
 
         aimPowerValueText.text = calculatePower().ToString();
-
     }
 
 
 
+    //Two methods below are used by event system when AimButton has stopped being pressed (event system)
+
+    public void onAimRelease()
+    {
+        Debug.Log("Oh yiss");
+        hideAimAssets();
+        resetRotation();
+
+        //Since the resetRotation() didn't apply fast enough, I had to delay the actual movement until next frame
+        //TODO: Try to make this work without the need of coroutine
+        StartCoroutine("moveNextFrame");
+    }
+
+    public IEnumerator moveNextFrame()
+    {
+        yield return null;
+        carPhysics.Move(calculatePower());
+        resetPosition();
+        aimButton.gameObject.SetActive(false);
+
+        // Before finishing this coroutine we start another which will be waiting for the movement to stop.
+        carPhysics.StartCoroutine("startNextTurnWhenStopped");
+    }
+
 
 
 }
+

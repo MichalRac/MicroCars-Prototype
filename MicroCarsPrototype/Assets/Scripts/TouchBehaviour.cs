@@ -8,7 +8,7 @@ namespace DigitalRubyShared
     {
         public CarPhysics carPhysics;
         private SwipeGestureRecognizer swipeGesture;
-        private readonly List<Vector3> swipeLines = new List<Vector3>();
+        //private readonly List<Vector3> swipeLines = new List<Vector3>();
 
         // Use this for initialization
         void Start()
@@ -66,7 +66,7 @@ namespace DigitalRubyShared
             }
         }
 
-
+        /*
         private void HandleSwipe(float endX, float endY)
         {
             Vector2 start = new Vector2(swipeGesture.StartFocusX, swipeGesture.StartFocusY);
@@ -84,7 +84,7 @@ namespace DigitalRubyShared
             }
 
         }
-
+        */
         
 
         

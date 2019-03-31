@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class CarPhysics : MonoBehaviour {
 
-    private const float minMovingSpeed = 0.01f;
+    private const float minMovingSpeed = 0.001f;
 
     private bool isMoving = false;
     public float carSpeed = 0.0f;
     public float turnPower = 5.0f;
     private Rigidbody2D rb2D;
+
+    public GameController gameController;
+
 
     private void Start()
     {
@@ -63,5 +66,19 @@ public class CarPhysics : MonoBehaviour {
             yield return new WaitForFixedUpdate();
         }
         
+    }
+    
+    public IEnumerator startNextTurnWhenStopped()
+    {
+        yield return null;      // Because coroutine ended up being called before any actual movement was applied resulting in bugs xd
+
+        while (rb2D.velocity.magnitude >= minMovingSpeed)
+        {
+            yield return new WaitForFixedUpdate();
+        }
+
+        rb2D.velocity = new Vector2(0.0f, 0.0f);
+        gameController.StartAimingTurn();
+
     }
 }
