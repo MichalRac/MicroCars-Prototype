@@ -8,7 +8,7 @@ namespace DigitalRubyShared
     {
         public CarPhysics carPhysics;
         private SwipeGestureRecognizer swipeGesture;
-        private readonly List<Vector3> swipeLines = new List<Vector3>();
+        //private readonly List<Vector3> swipeLines = new List<Vector3>();
 
         // Use this for initialization
         void Start()
@@ -27,6 +27,7 @@ namespace DigitalRubyShared
         {
             swipeGesture = new SwipeGestureRecognizer();
             swipeGesture.Direction = SwipeGestureRecognizerDirection.Left;
+
             swipeGesture.StateUpdated += SwipeLeftGestureCallback;
             swipeGesture.DirectionThreshold = 1.0f; // allow a swipe, regardless of slope
             FingersScript.Instance.AddGesture(swipeGesture);
@@ -48,7 +49,8 @@ namespace DigitalRubyShared
             {
 
                 Debug.Log("SwipedLeft");
-                carPhysics.SwipeAction("left");
+                float swipeLenght = SwipeLenght(gesture.FocusX, gesture.FocusY);
+                carPhysics.SwipeAction("left", swipeLenght);
                 
                 //HandleSwipe(gesture.FocusX, gesture.FocusY);
                 //DebugText("Swiped from {0},{1} to {2},{3}; velocity: {4}, {5}", gesture.StartFocusX, gesture.StartFocusY, gesture.FocusX, gesture.FocusY, swipeGesture.VelocityX, swipeGesture.VelocityY);
@@ -60,19 +62,24 @@ namespace DigitalRubyShared
             if (gesture.State == GestureRecognizerState.Ended)
             {
                 Debug.Log("SwipedRight");
-                carPhysics.SwipeAction("right");
+                float swipeLenght = SwipeLenght(gesture.FocusX, gesture.FocusY);
+                carPhysics.SwipeAction("right", swipeLenght);
                 //HandleSwipe(gesture.FocusX, gesture.FocusY);
                 //DebugText("Swiped from {0},{1} to {2},{3}; velocity: {4}, {5}", gesture.StartFocusX, gesture.StartFocusY, gesture.FocusX, gesture.FocusY, swipeGesture.VelocityX, swipeGesture.VelocityY);
             }
         }
 
-
-        private void HandleSwipe(float endX, float endY)
+        
+        private float SwipeLenght(float endX, float endY)
         {
             Vector2 start = new Vector2(swipeGesture.StartFocusX, swipeGesture.StartFocusY);
             Vector3 startWorld = Camera.main.ScreenToWorldPoint(start);
             Vector3 endWorld = Camera.main.ScreenToWorldPoint(new Vector2(endX, endY));
             float distance = Vector3.Distance(startWorld, endWorld);
+
+            return distance;
+
+            /*
             startWorld.z = endWorld.z = 0.0f;
 
             swipeLines.Add(startWorld);
@@ -82,9 +89,9 @@ namespace DigitalRubyShared
             {
                 swipeLines.RemoveRange(0, swipeLines.Count - 4);
             }
-
+            */
         }
-
+        
         
 
         

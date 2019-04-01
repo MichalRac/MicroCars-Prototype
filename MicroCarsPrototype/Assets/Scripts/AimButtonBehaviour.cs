@@ -5,42 +5,94 @@ using UnityEngine;
 
 public class AimButtonBehaviour : MonoBehaviour {
 
-
-    private Vector2 touchPoint;
-    private Vector2 localPos;
+    //this gameobject's transform reference
     private Transform aimButton;
-    private float aimPower;
 
+    [Header("Referenced GameObjects")]
     public Transform player;
     public Transform car;
-    public Transform ghostAimer;
-    public CarPhysics carPhysics;
+    public Transform ghostCar;
     public Transform aimDirectionAsset;
-    public Vector2 defaultPosition;
-    public float carSpeed;
-    public Text text;
+    public Text aimPowerValueText;
 
+    [Header("Referenced Scripts")]
+    public CarPhysics carPhysics;
+    public CameraController cameraController;
+    public GameController gameController;
 
-    // Use this for initialization
+    [Header("Default AimButton Position")]
+    public Vector2 defaultButtonPosition;
 
-    void Start ()
+    /// <summary>
+    /// This script is responsible for Aiming System, together with Player GameObject which is being aimed, and GameController, which is responsible
+    /// for deciding when we can actually aim.
+    /// </summary>
+
+    private void Awake()
     {
         aimButton = GetComponent<Transform>();
-	}
-	
+    }
 
-	public void moveAimButtonToTouchPosition ()
+
+    // Utility methods
+
+    public void resetPosition()
+    {
+        //Reseting the aim assets after input ends
+        aimButton.localPosition = defaultButtonPosition;
+        aimDirectionAsset.localPosition = -defaultButtonPosition;
+        ghostCar.localPosition = Vector2.zero;
+    }
+
+    public void resetRotation()
+    {
+        Quaternion tagetRotation = ghostCar.rotation;
+        Quaternion reset = new Quaternion(0.0f, 0.0f, 0.0f, 0.0f);
+
+        ghostCar.localRotation = reset;
+        car.localRotation = reset;
+        player.rotation = tagetRotation;
+
+        cameraController.fixCamera();
+    }
+
+    public float calculatePower()
+    {
+        float aimPower = Vector2.Distance(aimButton.position, player.transform.position);
+        return aimPower;
+    }
+
+    public void hideAimAssets()
+    {
+        
+        aimDirectionAsset.gameObject.SetActive(false);
+        ghostCar.gameObject.SetActive(false);
+    }
+
+    public void showAimButton()
+    {
+        aimButton.gameObject.SetActive(true);
+    }
+
+
+    
+    // Two methods below are used by event system when AimButton is held down (event system)
+
+    public void moveAimButtonToTouchPosition ()
     {
         //Finding input position and moving the aim button there
-        touchPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 touchPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         aimButton.position = touchPoint;
         moveDirectionArrow();
 	}
 
-
     // TODO: Make it so that holding button on either side of the screen slowly rotates the view
     public void moveDirectionArrow()
     {
+        //Displaying the aim arrow
+        aimDirectionAsset.gameObject.SetActive(true);
+        ghostCar.gameObject.SetActive(true);
+
         //Setting the aim direction arrow to the opposite of aim button
         aimDirectionAsset.localPosition = -aimButton.localPosition;
 
@@ -52,53 +104,43 @@ public class AimButtonBehaviour : MonoBehaviour {
         //Setting up the rotation for the aim button, car, and ghost car
         aimDirectionAsset.localRotation = rotation;
         car.localRotation = rotation;
-        ghostAimer.localRotation = rotation;
+        ghostCar.localRotation = rotation;
         //TODO: find if there is a more efficient way to set up ghost car position
-        ghostAimer.localPosition = aimButton.localPosition;
-        ghostAimer.position = Vector2.MoveTowards(ghostAimer.position, player.position, 0.5f);
+        ghostCar.localPosition = aimButton.localPosition;
+        ghostCar.position = Vector2.MoveTowards(ghostCar.position, player.position, 0.5f);
 
-        text.text = calculatePower().ToString();
-
+        aimPowerValueText.text = calculatePower().ToString();
     }
 
-    public void resetPosition()
-    {
 
-        //Reseting the aim assets after input ends
-        aimButton.localPosition = defaultPosition;
-        aimDirectionAsset.localPosition = -defaultPosition;
-        ghostAimer.localPosition = Vector2.zero;
+
+    //Two methods below are used by event system when AimButton has stopped being pressed (event system)
+
+    public void onAimRelease()
+    {
         
-    }
-
-    public void resetRotation()
-    {
-        Quaternion tagetRotation = ghostAimer.rotation;
-        Quaternion reset = new Quaternion(0.0f, 0.0f, 0.0f, 0.0f);
-
-        ghostAimer.localRotation = reset;
-        car.localRotation = reset;
-        player.rotation = tagetRotation;
-    }
-
-    //TODO
-    public float calculatePower()
-    {
-        aimPower = Vector2.Distance(aimButton.position, player.transform.position);
-        return aimPower;
-    }
-
-    public void startMoving()
-    {
+        hideAimAssets();
         resetRotation();
-        StartCoroutine(moveNextFrame());
-        
+        gameController.addOneTryCount();
+        gameController.switchTurnState(false);
+    
+        //Since the resetRotation() didn't apply fast enough, I had to delay the actual movement until next frame
+        //TODO: Try to make this work without the need of coroutine
+        StartCoroutine("moveNextFrame");
     }
+
     public IEnumerator moveNextFrame()
     {
         yield return null;
         carPhysics.Move(calculatePower());
         resetPosition();
+        aimButton.gameObject.SetActive(false);
+
+        // Before finishing this coroutine we start another which will be waiting for the movement to stop.
+        carPhysics.StartCoroutine("startNextTurnWhenStopped");
     }
 
+
+
 }
+
