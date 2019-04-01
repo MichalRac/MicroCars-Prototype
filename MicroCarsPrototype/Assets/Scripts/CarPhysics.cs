@@ -17,6 +17,7 @@ public class CarPhysics : MonoBehaviour {
     public float deltaDragPower = 0.5f;
     public float deltaDragTime = 0.5f;
     public float firstSlowTime = 0.5f;
+    public float surfaceDragModifiers = 1;
 
     [Header("Referenced Scripts")]
     public GameController gameController;
@@ -37,15 +38,14 @@ public class CarPhysics : MonoBehaviour {
     public IEnumerator startDynamicDrag()
     {
         float defaultDrag = rb2D.drag;
-        rb2D.drag = 0;
+        rb2D.drag = 0.0f;
 
         yield return null;  //Waiting for the velocity to apply
         yield return new WaitForSeconds(firstSlowTime);
         while (rb2D.velocity.magnitude >= minMovingSpeed)
         {
-            Debug.Log("Did it even work?");
             yield return new WaitForSeconds(deltaDragTime);
-            rb2D.drag += deltaDragPower;
+            rb2D.drag += deltaDragPower * surfaceDragModifiers;
         }
         rb2D.drag = defaultDrag;
         

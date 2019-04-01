@@ -18,7 +18,7 @@ public class AimButtonBehaviour : MonoBehaviour {
     [Header("Referenced Scripts")]
     public CarPhysics carPhysics;
     public CameraController cameraController;
-
+    public GameController gameController;
 
     [Header("Default AimButton Position")]
     public Vector2 defaultButtonPosition;
@@ -71,7 +71,6 @@ public class AimButtonBehaviour : MonoBehaviour {
 
     public void showAimButton()
     {
-        Debug.Log("Showing AimButton");
         aimButton.gameObject.SetActive(true);
     }
 
@@ -119,10 +118,12 @@ public class AimButtonBehaviour : MonoBehaviour {
 
     public void onAimRelease()
     {
-        Debug.Log("Oh yiss");
+        
         hideAimAssets();
         resetRotation();
-
+        gameController.addOneTryCount();
+        gameController.switchTurnState(false);
+    
         //Since the resetRotation() didn't apply fast enough, I had to delay the actual movement until next frame
         //TODO: Try to make this work without the need of coroutine
         StartCoroutine("moveNextFrame");

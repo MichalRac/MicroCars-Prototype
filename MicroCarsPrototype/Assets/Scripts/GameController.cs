@@ -9,21 +9,29 @@ public class GameController : MonoBehaviour
 
     public AimButtonBehaviour aimButtonBehaviour;
     public CarPhysics carPhysics;
+    public UISceneControler uiSceneControler;
 
     void Start()
     {
-        isPlayerTurn = true;
+        switchTurnState(true);
         StartAimingTurn();
     }
 
     public void StartAimingTurn()
     {
-
-        Debug.Log("Starting turn");
-
-        isPlayerTurn = true;
+        switchTurnState(true);
         aimButtonBehaviour.showAimButton();
+    }
 
+    public void addOneTryCount()
+    {
+        uiSceneControler.addOneTry();
+    }
+
+    public void switchTurnState(bool target)
+    {
+        isPlayerTurn = target;
+        uiSceneControler.switchTurnInfo(isPlayerTurn);
     }
 
 }
