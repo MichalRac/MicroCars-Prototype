@@ -5,16 +5,20 @@ using UnityEngine;
 public class CarPhysics : MonoBehaviour {
 
     private const float minMovingSpeed = 0.001f;
-
     private bool isMoving = false;
+    private Rigidbody2D rb2D;
+
+    [Header("Speed and swipe turning options")]
     public float carSpeed = 0.0f;
     public float turnPower = 5.0f;
+    public float turnSwipeResponsivness = 1.0f;
 
+    [Header("Dynamic drag options")]
     public float deltaDragPower = 0.5f;
     public float deltaDragTime = 0.5f;
     public float firstSlowTime = 0.5f;
 
-    private Rigidbody2D rb2D;
+    [Header("Referenced Scripts")]
     public GameController gameController;
 
 
@@ -47,18 +51,18 @@ public class CarPhysics : MonoBehaviour {
         
     }
 
-    public void SwipeAction(string direction)
+    public void SwipeAction(string direction, float swipeLenght)
     {
         
         if (direction == "left")
         {
-            rb2D.AddTorque(turnPower);
+            rb2D.AddTorque(turnPower * (swipeLenght * turnSwipeResponsivness));
             StartCoroutine("maintainVelocityRotation");
         }
         else if (direction == "right")
         {
 
-            rb2D.AddTorque(-turnPower);
+            rb2D.AddTorque(-turnPower * (swipeLenght * turnSwipeResponsivness));
             StartCoroutine("maintainVelocityRotation");
             //Quaternion rotation = new Quaternion(0.0f, 0.0f, rb2D.transform.rotation.z - turnDegrees, 0.0f);
             //Debug.Log(rb2D.transform.rotation.z - turnDegrees);
