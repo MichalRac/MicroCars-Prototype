@@ -30,6 +30,7 @@ public class CarPhysics : MonoBehaviour {
 
     public void Move(float moveForce)
     {
+        isMoving = true;
         Vector2 moveForceVector = new Vector2(0.0f, moveForce * carSpeed);
         rb2D.AddRelativeForce(moveForceVector);
         StartCoroutine("startDynamicDrag");
@@ -53,6 +54,8 @@ public class CarPhysics : MonoBehaviour {
 
     public void SwipeAction(string direction, float swipeLenght)
     {
+        if (isMoving == false)
+            return;
         
         if (direction == "left")
         {
@@ -101,6 +104,7 @@ public class CarPhysics : MonoBehaviour {
         }
 
         rb2D.velocity = new Vector2(0.0f, 0.0f);
+        isMoving = false;
         gameController.StartAimingTurn();
 
     }
