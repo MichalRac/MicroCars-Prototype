@@ -59,15 +59,20 @@ public class AimButtonBehaviour : MonoBehaviour {
     public float calculatePower()
     {
         float aimPower = Vector2.Distance(aimButton.position, player.transform.position);
+
+        if (aimPower < 1.0f)
+            return 0;
+
         return aimPower;
     }
 
-    public void hideAimAssets()
+    public void displayAimAssets(bool setDisplay)
     {
-        
-        aimDirectionAsset.gameObject.SetActive(false);
-        ghostCar.gameObject.SetActive(false);
+
+        aimDirectionAsset.gameObject.SetActive(setDisplay);
+        ghostCar.gameObject.SetActive(setDisplay);
     }
+
 
     public void showAimButton()
     {
@@ -89,9 +94,12 @@ public class AimButtonBehaviour : MonoBehaviour {
     // TODO: Make it so that holding button on either side of the screen slowly rotates the view
     public void moveDirectionArrow()
     {
-        //Displaying the aim arrow
-        aimDirectionAsset.gameObject.SetActive(true);
-        ghostCar.gameObject.SetActive(true);
+        //Displaying the aim arrow IF the aim was pulled far enough
+        if (calculatePower() > 0)
+            displayAimAssets(true);
+        else
+            displayAimAssets(false);
+        
 
         //Setting the aim direction arrow to the opposite of aim button
         aimDirectionAsset.localPosition = -aimButton.localPosition;
@@ -118,8 +126,16 @@ public class AimButtonBehaviour : MonoBehaviour {
 
     public void onAimRelease()
     {
-        
-        hideAimAssets();
+        if (calculatePower() == 0)
+        {
+            resetPosition();
+            resetRotation();
+            return;
+        }
+
+
+
+        displayAimAssets(false);
         resetRotation();
         gameController.addOneTryCount();
         gameController.switchTurnState(false);
