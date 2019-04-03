@@ -108,4 +108,12 @@ public class CarPhysics : MonoBehaviour {
         gameController.StartAimingTurn();
 
     }
+
+    /*
+    public void customTurnEffect(float turnDurationSec, float targetAngle)
+    {
+
+    }
+    */
+
 }
