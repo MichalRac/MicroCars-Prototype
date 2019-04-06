@@ -54,7 +54,7 @@ public class CarPhysics : MonoBehaviour {
 
     public void SwipeAction(string direction, float swipeLenght)
     {
-        if (isMoving == false)
+        if (gameController.getIsPlayerTurn() == true)
             return;
         
         if (direction == "left")
@@ -105,6 +105,7 @@ public class CarPhysics : MonoBehaviour {
 
         rb2D.velocity = new Vector2(0.0f, 0.0f);
         isMoving = false;
+        gameController.switchTurnState(false);
         gameController.StartAimingTurn();
 
     }
@@ -112,6 +113,8 @@ public class CarPhysics : MonoBehaviour {
     /*
     public void customTurnEffect(float turnDurationSec, float targetAngle)
     {
+
+
 
     }
     */

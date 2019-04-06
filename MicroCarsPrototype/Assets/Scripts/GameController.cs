@@ -34,4 +34,9 @@ public class GameController : MonoBehaviour
         uiSceneControler.switchTurnInfo(isPlayerTurn);
     }
 
+    public bool getIsPlayerTurn()
+    {
+        return isPlayerTurn;
+    }
+
 }
