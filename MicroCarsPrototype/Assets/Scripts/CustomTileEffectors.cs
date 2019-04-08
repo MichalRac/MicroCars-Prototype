@@ -8,6 +8,7 @@ public class CustomTileEffectors : MonoBehaviour
     private CarPhysics carPhysics;
     private GameObject effector;
 
+    public float turnTime;
     public float effectorAngle;
 
     // Start is called before the first frame update
@@ -19,10 +20,12 @@ public class CustomTileEffectors : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         CarPhysics carPhysicsScript = other.GetComponent<CarPhysics>();
-        if(carPhysicsScript != null)
+        if (carPhysicsScript != null)
         {
-            
+            return;
         }
+        else
+            carPhysicsScript.triggerCustomTurnEffect(turnTime, effectorAngle);
     }
 
 
