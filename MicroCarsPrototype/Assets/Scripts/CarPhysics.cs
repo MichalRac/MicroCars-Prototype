@@ -96,14 +96,16 @@ public class CarPhysics : MonoBehaviour {
     
     public IEnumerator startNextTurnWhenStopped()
     {
-        yield return null;      // Because coroutine ended up being called before any actual movement was applied resulting in bugs xd
+        yield return new WaitForSeconds(1);      // Because coroutine ended up being called before any actual movement was applied resulting in bugs xd
 
         while (rb2D.velocity.magnitude >= minMovingSpeed)
         {
             yield return new WaitForFixedUpdate();
         }
-
+        rb2D.angularVelocity = 0;
         rb2D.velocity = new Vector2(0.0f, 0.0f);
+        yield return null;                      // So that the angularVelocity is applied for sure before we change the game state.
+
         isMoving = false;
         gameController.switchTurnState(false);
         gameController.StartAimingTurn();
