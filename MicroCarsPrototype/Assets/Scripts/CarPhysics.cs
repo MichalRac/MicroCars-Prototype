@@ -7,6 +7,7 @@ public class CarPhysics : MonoBehaviour {
     private const float minMovingSpeed = 0.001f;
     private bool isMoving = false;
     private Rigidbody2D rb2D;
+    private GameObject gO;
 
     [Header("Speed and swipe turning options")]
     public float carSpeed = 0.0f;
@@ -25,6 +26,7 @@ public class CarPhysics : MonoBehaviour {
 
     private void Start()
     {
+        gO = GetComponent<GameObject>();
         rb2D = GetComponent<Rigidbody2D>();
     }
 
@@ -54,7 +56,7 @@ public class CarPhysics : MonoBehaviour {
 
     public void SwipeAction(string direction, float swipeLenght)
     {
-        if (isMoving == false)
+        if (gameController.getIsPlayerTurn() == true)
             return;
         
         if (direction == "left")
@@ -96,24 +98,45 @@ public class CarPhysics : MonoBehaviour {
     
     public IEnumerator startNextTurnWhenStopped()
     {
-        yield return null;      // Because coroutine ended up being called before any actual movement was applied resulting in bugs xd
+        yield return new WaitForSeconds(1);      // Because coroutine ended up being called before any actual movement was applied resulting in bugs xd
 
         while (rb2D.velocity.magnitude >= minMovingSpeed)
         {
             yield return new WaitForFixedUpdate();
         }
-
+        rb2D.angularVelocity = 0;
         rb2D.velocity = new Vector2(0.0f, 0.0f);
+        yield return null;                      // So that the angularVelocity is applied for sure before we change the game state.
+
         isMoving = false;
+        gameController.switchTurnState(false);
         gameController.StartAimingTurn();
 
     }
 
-    /*
-    public void customTurnEffect(float turnDurationSec, float targetAngle)
-    {
 
+
+    // TODO: Make following work :c
+    public void triggerCustomTurnEffect(float turnDurationSec, float targetAngle)
+    {
+        StartCoroutine(customTurnEffect(turnDurationSec, targetAngle));
     }
-    */
+
+    public IEnumerator customTurnEffect(float turnDurationSec, float targetAngle)
+    {
+        Debug.Log("Turning Starts");
+        Quaternion targetRotation = new Quaternion(0.0f, 0.0f, targetAngle, 0.0f);
+        float deltaRotation = Time.fixedDeltaTime / turnDurationSec;
+
+        yield return new WaitForFixedUpdate();
+        
+        while(gO.transform.rotation != targetRotation)
+        {
+            rb2D.gameObject.transform.rotation = Quaternion.RotateTowards(gO.transform.rotation, targetRotation, deltaRotation);
+            yield return new WaitForFixedUpdate();
+        }
+        
+    }
+
 
 }
