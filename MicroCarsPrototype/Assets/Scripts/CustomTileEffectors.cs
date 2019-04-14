@@ -17,11 +17,15 @@ public class CustomTileEffectors : MonoBehaviour
         carPhysics = player.GetComponent<CarPhysics>();
     }
 
-    private void OnTriggerEnter(Collider other)
+    
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        CarPhysics carPhysicsScript = other.GetComponent<CarPhysics>();
-        if (carPhysicsScript != null)
+        Debug.Log("TileEffector TriggerEnter");
+        CarPhysics carPhysicsScript = collision.GetComponent<CarPhysics>();
+        if (carPhysicsScript == null)
         {
+            Debug.Log("CarPhysics not found");
             return;
         }
         else
