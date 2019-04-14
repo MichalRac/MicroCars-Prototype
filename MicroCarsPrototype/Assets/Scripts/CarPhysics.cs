@@ -22,6 +22,9 @@ public class CarPhysics : MonoBehaviour {
     [Header("Referenced Scripts")]
     public GameController gameController;
 
+
+
+
     private void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
@@ -33,6 +36,7 @@ public class CarPhysics : MonoBehaviour {
         Vector2 moveForceVector = new Vector2(0.0f, moveForce * carSpeed);
         rb2D.AddRelativeForce(moveForceVector);
         StartCoroutine("startDynamicDrag");
+        StartCoroutine("maintainVelocityRotation");
     }
 
     public IEnumerator startDynamicDrag()
@@ -51,38 +55,9 @@ public class CarPhysics : MonoBehaviour {
         
     }
 
-    public void SwipeAction(string direction, float swipeLenght)
-    {
-        if (gameController.getIsPlayerTurn() == true)
-            return;
-        
-        if (direction == "left")
-        {
-            rb2D.AddTorque(turnPower * (swipeLenght * turnSwipeResponsivness));
-            StartCoroutine("maintainVelocityRotation");
-        }
-        else if (direction == "right")
-        {
-
-            rb2D.AddTorque(-turnPower * (swipeLenght * turnSwipeResponsivness));
-            StartCoroutine("maintainVelocityRotation");
-            //Quaternion rotation = new Quaternion(0.0f, 0.0f, rb2D.transform.rotation.z - turnDegrees, 0.0f);
-            //Debug.Log(rb2D.transform.rotation.z - turnDegrees);
-            //rb2D.transform.rotation = rotation;
-        }
-    }
-
-    private void Update()
-    {
-        if(Input.GetButton("Jump")){
-            Move(carSpeed);
-        }
-
-    }
-
     public IEnumerator maintainVelocityRotation()
     {
-        while(rb2D.velocity.magnitude > minMovingSpeed)
+        while (rb2D.velocity.magnitude > minMovingSpeed)
         {
 
             Vector3 velocity = rb2D.velocity;
@@ -90,9 +65,23 @@ public class CarPhysics : MonoBehaviour {
             //rb2D.velocity = transform.forward * velocity.magnitude;
             yield return new WaitForFixedUpdate();
         }
+
+    }
+
+
+    public void SwipeAction(string direction, float swipeLenght)
+    {
+        if (gameController.getIsPlayerTurn() == true)
+            return;
         
+        if (direction == "left")
+            rb2D.AddTorque(turnPower * (swipeLenght * turnSwipeResponsivness));
+
+        else if (direction == "right")
+            rb2D.AddTorque(-turnPower * (swipeLenght * turnSwipeResponsivness));
     }
     
+
     public IEnumerator startNextTurnWhenStopped()
     {
         yield return new WaitForSeconds(1);      // Because coroutine ended up being called before any actual movement was applied resulting in bugs xd
