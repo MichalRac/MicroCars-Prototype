@@ -5,8 +5,8 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
 
-    private bool isPlayerTurn;              //Player turn: moment when he can Aim
-
+    private bool isPlayerTurn { get; set; }  //Player turn: moment when he can Aim
+    
     public AimButtonBehaviour aimButtonBehaviour;
     public CarPhysics carPhysics;
     public UISceneControler uiSceneControler;
@@ -39,4 +39,5 @@ public class GameController : MonoBehaviour
         return isPlayerTurn;
     }
 
+    
 }

@@ -7,7 +7,6 @@ public class CarPhysics : MonoBehaviour {
     private const float minMovingSpeed = 0.001f;
     private bool isMoving = false;
     private Rigidbody2D rb2D;
-    private GameObject gO;
 
     [Header("Speed and swipe turning options")]
     public float carSpeed = 0.0f;
@@ -24,9 +23,10 @@ public class CarPhysics : MonoBehaviour {
     public GameController gameController;
 
 
+
+
     private void Start()
     {
-        gO = GetComponent<GameObject>();
         rb2D = GetComponent<Rigidbody2D>();
     }
 
@@ -36,6 +36,7 @@ public class CarPhysics : MonoBehaviour {
         Vector2 moveForceVector = new Vector2(0.0f, moveForce * carSpeed);
         rb2D.AddRelativeForce(moveForceVector);
         StartCoroutine("startDynamicDrag");
+        StartCoroutine("maintainVelocityRotation");
     }
 
     public IEnumerator startDynamicDrag()
@@ -54,38 +55,9 @@ public class CarPhysics : MonoBehaviour {
         
     }
 
-    public void SwipeAction(string direction, float swipeLenght)
-    {
-        if (gameController.getIsPlayerTurn() == true)
-            return;
-        
-        if (direction == "left")
-        {
-            rb2D.AddTorque(turnPower * (swipeLenght * turnSwipeResponsivness));
-            StartCoroutine("maintainVelocityRotation");
-        }
-        else if (direction == "right")
-        {
-
-            rb2D.AddTorque(-turnPower * (swipeLenght * turnSwipeResponsivness));
-            StartCoroutine("maintainVelocityRotation");
-            //Quaternion rotation = new Quaternion(0.0f, 0.0f, rb2D.transform.rotation.z - turnDegrees, 0.0f);
-            //Debug.Log(rb2D.transform.rotation.z - turnDegrees);
-            //rb2D.transform.rotation = rotation;
-        }
-    }
-
-    private void Update()
-    {
-        if(Input.GetButton("Jump")){
-            Move(carSpeed);
-        }
-
-    }
-
     public IEnumerator maintainVelocityRotation()
     {
-        while(rb2D.velocity.magnitude > minMovingSpeed)
+        while (rb2D.velocity.magnitude > minMovingSpeed)
         {
 
             Vector3 velocity = rb2D.velocity;
@@ -93,9 +65,23 @@ public class CarPhysics : MonoBehaviour {
             //rb2D.velocity = transform.forward * velocity.magnitude;
             yield return new WaitForFixedUpdate();
         }
+
+    }
+
+
+    public void SwipeAction(string direction, float swipeLenght)
+    {
+        if (gameController.getIsPlayerTurn() == true)
+            return;
         
+        if (direction == "left")
+            rb2D.AddTorque(turnPower * (swipeLenght * turnSwipeResponsivness));
+
+        else if (direction == "right")
+            rb2D.AddTorque(-turnPower * (swipeLenght * turnSwipeResponsivness));
     }
     
+
     public IEnumerator startNextTurnWhenStopped()
     {
         yield return new WaitForSeconds(1);      // Because coroutine ended up being called before any actual movement was applied resulting in bugs xd
@@ -116,27 +102,30 @@ public class CarPhysics : MonoBehaviour {
 
 
 
-    // TODO: Make following work :c
     public void triggerCustomTurnEffect(float turnDurationSec, float targetAngle)
     {
         StartCoroutine(customTurnEffect(turnDurationSec, targetAngle));
     }
 
+    //TODO: Make the turn happen over precise seconds set in turnDurationSec
     public IEnumerator customTurnEffect(float turnDurationSec, float targetAngle)
     {
-        Debug.Log("Turning Starts");
-        Quaternion targetRotation = new Quaternion(0.0f, 0.0f, targetAngle, 0.0f);
-        float deltaRotation = Time.fixedDeltaTime / turnDurationSec;
+        Quaternion targetRotation = Quaternion.Euler(0.0f, 0.0f, targetAngle);
+        float angleDifference = Quaternion.Angle(gameObject.transform.rotation, targetRotation);
 
-        yield return new WaitForFixedUpdate();
-        
-        while(gO.transform.rotation != targetRotation)
+        float timeElapsed = 0.0f;
+
+        while (Quaternion.Angle(gameObject.transform.rotation, targetRotation) > 0.001f)
         {
-            rb2D.gameObject.transform.rotation = Quaternion.RotateTowards(gO.transform.rotation, targetRotation, deltaRotation);
+            Debug.Log(timeElapsed);
+            timeElapsed += Time.fixedDeltaTime;
+
+            float deltaAngle = angleDifference * (Time.fixedDeltaTime / turnDurationSec);
+            gameObject.transform.rotation = Quaternion.RotateTowards(gameObject.transform.rotation, targetRotation, deltaAngle);
             yield return new WaitForFixedUpdate();
         }
-        
     }
+
 
 
 }

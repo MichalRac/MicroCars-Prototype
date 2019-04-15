@@ -8,6 +8,7 @@ public class CustomTileEffectors : MonoBehaviour
     private CarPhysics carPhysics;
     private GameObject effector;
 
+    public float accelaratePower;
     public float turnTime;
     public float effectorAngle;
 
@@ -17,15 +18,22 @@ public class CustomTileEffectors : MonoBehaviour
         carPhysics = player.GetComponent<CarPhysics>();
     }
 
-    private void OnTriggerEnter(Collider other)
+    
+
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        CarPhysics carPhysicsScript = other.GetComponent<CarPhysics>();
-        if (carPhysicsScript != null)
+        Debug.Log("TileEffector TriggerEnter");
+        CarPhysics carPhysicsScript = collision.GetComponent<CarPhysics>();
+        if (carPhysicsScript == null)
         {
+            Debug.Log("CarPhysics not found");
             return;
         }
         else
+        {
             carPhysicsScript.triggerCustomTurnEffect(turnTime, effectorAngle);
+            carPhysicsScript.Move(accelaratePower);
+        }
     }
 
 
