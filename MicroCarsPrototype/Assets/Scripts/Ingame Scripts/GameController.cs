@@ -7,8 +7,11 @@ public class GameController : MonoBehaviour
 
     private bool isPlayerTurn { get; set; }  //Player turn: moment when he can Aim
     private const int MaxPlayerNumber = 4;
-   
-    
+
+    public GameObject[] levels;
+    private GameObject currentLevel;
+    private int currentLevelNumber;
+
     public GameObject[] cars = new GameObject[MaxPlayerNumber];
     public GameObject[] startingPosition = new GameObject[MaxPlayerNumber];
     public float[] rotation = new float[MaxPlayerNumber];
@@ -20,7 +23,16 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
+        currentLevelNumber = 0;
+        currentLevel = Instantiate(levels[0]) as GameObject;
+        
+        setupLevel();
+    }
 
+
+    public void setupLevel()
+    {
+        findStartPos();
         for (int i = 0; i < startingPosition.Length; i++)
         {
             if (cars[i] == null)
@@ -37,15 +49,24 @@ public class GameController : MonoBehaviour
         StartAimingTurn();
     }
 
+    private void findStartPos() // There should be a better way to do this than by searching the level gameObject by name I think.
+    {
+        Transform[] startPosTransforms = currentLevel.GetComponentsInChildren<Transform>();
+        foreach (Transform p in startPosTransforms)
+        {
+            if (p.gameObject.name == "start_pos")
+            {
+                startingPosition[0] = p.gameObject;
+                break;
+            }
+        }
+    }
+
+
     public void StartAimingTurn()
     {
         switchTurnState(true);
         aimButtonBehaviour.showAimButton();
-    }
-
-    public void addOneTryCount()
-    {
-        uiSceneControler.addOneTry();
     }
 
     public void switchTurnState(bool target)
@@ -54,9 +75,25 @@ public class GameController : MonoBehaviour
         uiSceneControler.switchTurnInfo(isPlayerTurn);
     }
 
+    public void addOneTryCount()
+    {
+        uiSceneControler.addOneTry();
+    }
+
     public bool getIsPlayerTurn()
     {
         return isPlayerTurn;
+    }
+
+    public void nextLevel()
+    {
+        Destroy(currentLevel.gameObject);
+
+        if (++currentLevelNumber == levels.Length)
+            currentLevelNumber = 0;
+
+        currentLevel = Instantiate(levels[currentLevelNumber]) as GameObject;
+        setupLevel();
     }
 
     

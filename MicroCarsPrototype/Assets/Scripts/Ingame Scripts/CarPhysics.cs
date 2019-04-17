@@ -12,6 +12,7 @@ public class CarPhysics : MonoBehaviour {
     public float carSpeed = 0.0f;
     public float turnPower = 5.0f;
     public float turnSwipeResponsivness = 1.0f;
+    public float breaksPower = 3.0f;
 
     [Header("Dynamic drag options")]
     public float deltaDragPower = 0.5f;
@@ -20,7 +21,7 @@ public class CarPhysics : MonoBehaviour {
     public float surfaceDragModifiers = 1;
 
     [Header("Referenced Scripts")]
-    public GameController gameController;
+    private GameController gameController;
 
 
 
@@ -28,6 +29,8 @@ public class CarPhysics : MonoBehaviour {
     private void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
+
+        gameController = FindObjectOfType<GameController>();
     }
 
     public void Move(float moveForce)
@@ -75,10 +78,16 @@ public class CarPhysics : MonoBehaviour {
             return;
         
         if (direction == "left")
+        {
             rb2D.AddTorque(turnPower * (swipeLenght * turnSwipeResponsivness));
+            StartCoroutine("maintainVelocityRotation");
+        }
 
         else if (direction == "right")
+        {
             rb2D.AddTorque(-turnPower * (swipeLenght * turnSwipeResponsivness));
+            StartCoroutine("maintainVelocityRotation");
+        }
     }
     
 
@@ -127,5 +136,16 @@ public class CarPhysics : MonoBehaviour {
     }
 
 
+    public void breaksOn()
+    {
+        rb2D.drag += breaksPower;
+        rb2D.angularDrag += breaksPower;
+    }
+
+    public void breaksOff()
+    {
+        rb2D.drag -= breaksPower;
+        rb2D.angularDrag -= breaksPower;
+    }
 
 }
