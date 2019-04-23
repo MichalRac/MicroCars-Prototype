@@ -36,6 +36,10 @@ public class CustomTileEffectors : MonoBehaviour
         }
     }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        carPhysics.StopCoroutine("customTurnEffect");
+    }
 
 
 }
