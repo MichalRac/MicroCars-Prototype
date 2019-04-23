@@ -7,6 +7,7 @@ public class CarPhysics : MonoBehaviour {
     private const float minMovingSpeed = 0.001f;
     private bool isMoving = false;
     private Rigidbody2D rb2D;
+    private float defaultAngularDrag;
 
     [Header("Speed and swipe turning options")]
     public float carSpeed = 0.0f;
@@ -24,6 +25,7 @@ public class CarPhysics : MonoBehaviour {
     private GameController gameController;
 
 
+    // TODO?: REWORK ALL THOSE GOD FORSAKEN COROUTINES INTO INVOKES?
 
 
     private void Start()
@@ -31,6 +33,7 @@ public class CarPhysics : MonoBehaviour {
         rb2D = GetComponent<Rigidbody2D>();
 
         gameController = FindObjectOfType<GameController>();
+        defaultAngularDrag = rb2D.angularDrag;
     }
 
     public void Move(float moveForce)
@@ -79,13 +82,13 @@ public class CarPhysics : MonoBehaviour {
         
         if (direction == "left")
         {
-            rb2D.AddTorque(turnPower * (swipeLenght * turnSwipeResponsivness));
+            rb2D.AddTorque(turnPower /* * (swipeLenght * turnSwipeResponsivness) */);
             StartCoroutine("maintainVelocityRotation");
         }
 
         else if (direction == "right")
         {
-            rb2D.AddTorque(-turnPower * (swipeLenght * turnSwipeResponsivness));
+            rb2D.AddTorque(-turnPower /* * (swipeLenght * turnSwipeResponsivness) */);
             StartCoroutine("maintainVelocityRotation");
         }
     }
@@ -98,7 +101,11 @@ public class CarPhysics : MonoBehaviour {
         while (rb2D.velocity.magnitude >= minMovingSpeed)
         {
             yield return new WaitForFixedUpdate();
+
+            if (rb2D.velocity.magnitude >= 2.0f)
+                rb2D.angularDrag = 3.0f;
         }
+        rb2D.angularDrag = defaultAngularDrag;
         rb2D.angularVelocity = 0;
         rb2D.velocity = new Vector2(0.0f, 0.0f);
         yield return null;                      // So that the angularVelocity is applied for sure before we change the game state.
@@ -147,5 +154,22 @@ public class CarPhysics : MonoBehaviour {
         rb2D.drag -= breaksPower;
         rb2D.angularDrag -= breaksPower;
     }
+
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.GetComponent<Collider2D>() != null)
+        {
+            rb2D.angularDrag += 3.0f;
+            Invoke("resetAngularDrag", 1.0f);
+            
+        }
+    }
+
+    private void resetAngularDrag()
+    {
+        rb2D.angularDrag = defaultAngularDrag;
+    }
+
 
 }
