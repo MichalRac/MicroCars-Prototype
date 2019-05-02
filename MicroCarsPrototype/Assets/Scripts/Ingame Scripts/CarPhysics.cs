@@ -19,7 +19,7 @@ public class CarPhysics : MonoBehaviour {
     [Header("Dynamic drag options")]
     public float deltaDragPower = 0.5f;
     public float deltaDragTime = 0.5f;
-    public float firstSlowTime = 0.5f;
+    public float firstSlowTimeDelay = 0.5f;
     public float surfaceDragModifiers = 1;
 
     [Header("Referenced Scripts")]
@@ -58,7 +58,7 @@ public class CarPhysics : MonoBehaviour {
         rb2D.drag = 0.0f;
 
         yield return null;  //Waiting for the velocity to apply
-        yield return new WaitForSeconds(firstSlowTime);
+        yield return new WaitForSeconds(firstSlowTimeDelay);
         while (rb2D.velocity.magnitude >= minMovingSpeed)
         {
             yield return new WaitForSeconds(deltaDragTime);
@@ -110,10 +110,10 @@ public class CarPhysics : MonoBehaviour {
             yield return new WaitForFixedUpdate();
 
             if (rb2D.velocity.magnitude >= 2.0f)
-                rb2D.angularDrag = 3.0f;
+                rb2D.angularDrag = 0.0f;
         }
         rb2D.angularDrag = defaultAngularDrag;
-        rb2D.angularVelocity = 0;
+        rb2D.angularVelocity = 3.0f;
         rb2D.velocity = new Vector2(0.0f, 0.0f);
         yield return null;                      // So that the angularVelocity is applied for sure before we change the game state.
 

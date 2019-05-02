@@ -692,7 +692,12 @@ PrefabInstance:
     - target: {fileID: 6844897879987237189, guid: 89657c702d4e2b34e85463bc9b10a6f5,
         type: 3}
       propertyPath: carMaxVelocity
-      value: 7.5
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6844897879987237189, guid: 89657c702d4e2b34e85463bc9b10a6f5,
+        type: 3}
+      propertyPath: firstSlowTimeDelay
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6844897880026246913, guid: 89657c702d4e2b34e85463bc9b10a6f5,
         type: 3}
@@ -777,17 +782,17 @@ PrefabInstance:
     - target: {fileID: 6844897880026246924, guid: 89657c702d4e2b34e85463bc9b10a6f5,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 7
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 6844897880026246924, guid: 89657c702d4e2b34e85463bc9b10a6f5,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 7
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 6844897880026246914, guid: 89657c702d4e2b34e85463bc9b10a6f5,
         type: 3}
       propertyPath: m_Color.a
-      value: 0.15686275
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6844897880026246914, guid: 89657c702d4e2b34e85463bc9b10a6f5,
         type: 3}
