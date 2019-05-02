@@ -220,6 +220,53 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameController
       objectReference: {fileID: 0}
+    - target: {fileID: 262699034891333964, guid: 38d0f2712b0fb24468a57c3854ac80db,
+        type: 3}
+      propertyPath: levels.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 262699034891333964, guid: 38d0f2712b0fb24468a57c3854ac80db,
+        type: 3}
+      propertyPath: startingPosition.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 262699034891333964, guid: 38d0f2712b0fb24468a57c3854ac80db,
+        type: 3}
+      propertyPath: cars.Array.data[0]
+      value: 
+      objectReference: {fileID: 32853501}
+    - target: {fileID: 262699034891333964, guid: 38d0f2712b0fb24468a57c3854ac80db,
+        type: 3}
+      propertyPath: startingPosition.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 262699034891333964, guid: 38d0f2712b0fb24468a57c3854ac80db,
+        type: 3}
+      propertyPath: aimButtonBehaviour
+      value: 
+      objectReference: {fileID: 55186363}
+    - target: {fileID: 262699034891333964, guid: 38d0f2712b0fb24468a57c3854ac80db,
+        type: 3}
+      propertyPath: carPhysics
+      value: 
+      objectReference: {fileID: 32853503}
+    - target: {fileID: 262699034891333964, guid: 38d0f2712b0fb24468a57c3854ac80db,
+        type: 3}
+      propertyPath: uiSceneControler
+      value: 
+      objectReference: {fileID: 1529015714}
+    - target: {fileID: 262699034891333964, guid: 38d0f2712b0fb24468a57c3854ac80db,
+        type: 3}
+      propertyPath: levels.Array.data[0]
+      value: 
+      objectReference: {fileID: 6096712866873061352, guid: 4a2f2d0206ee9db4f9fd64666468962e,
+        type: 3}
+    - target: {fileID: 262699034891333964, guid: 38d0f2712b0fb24468a57c3854ac80db,
+        type: 3}
+      propertyPath: levels.Array.data[1]
+      value: 
+      objectReference: {fileID: 6571594370570661000, guid: a71a678498411914a9703939b78139b4,
+        type: 3}
     - target: {fileID: 262699034891333963, guid: 38d0f2712b0fb24468a57c3854ac80db,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -280,53 +327,6 @@ PrefabInstance:
       propertyPath: carPhysics
       value: 
       objectReference: {fileID: 32853503}
-    - target: {fileID: 262699034891333964, guid: 38d0f2712b0fb24468a57c3854ac80db,
-        type: 3}
-      propertyPath: levels.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 262699034891333964, guid: 38d0f2712b0fb24468a57c3854ac80db,
-        type: 3}
-      propertyPath: startingPosition.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 262699034891333964, guid: 38d0f2712b0fb24468a57c3854ac80db,
-        type: 3}
-      propertyPath: cars.Array.data[0]
-      value: 
-      objectReference: {fileID: 32853501}
-    - target: {fileID: 262699034891333964, guid: 38d0f2712b0fb24468a57c3854ac80db,
-        type: 3}
-      propertyPath: startingPosition.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 262699034891333964, guid: 38d0f2712b0fb24468a57c3854ac80db,
-        type: 3}
-      propertyPath: aimButtonBehaviour
-      value: 
-      objectReference: {fileID: 55186363}
-    - target: {fileID: 262699034891333964, guid: 38d0f2712b0fb24468a57c3854ac80db,
-        type: 3}
-      propertyPath: carPhysics
-      value: 
-      objectReference: {fileID: 32853503}
-    - target: {fileID: 262699034891333964, guid: 38d0f2712b0fb24468a57c3854ac80db,
-        type: 3}
-      propertyPath: uiSceneControler
-      value: 
-      objectReference: {fileID: 1529015714}
-    - target: {fileID: 262699034891333964, guid: 38d0f2712b0fb24468a57c3854ac80db,
-        type: 3}
-      propertyPath: levels.Array.data[0]
-      value: 
-      objectReference: {fileID: 6096712866873061352, guid: 4a2f2d0206ee9db4f9fd64666468962e,
-        type: 3}
-    - target: {fileID: 262699034891333964, guid: 38d0f2712b0fb24468a57c3854ac80db,
-        type: 3}
-      propertyPath: levels.Array.data[1]
-      value: 
-      objectReference: {fileID: 6571594370570661000, guid: a71a678498411914a9703939b78139b4,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38d0f2712b0fb24468a57c3854ac80db, type: 3}
 --- !u!1001 &4366503757833821399
@@ -674,6 +674,41 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6844897879987237189, guid: 89657c702d4e2b34e85463bc9b10a6f5,
+        type: 3}
+      propertyPath: gameController
+      value: 
+      objectReference: {fileID: 1963401061}
+    - target: {fileID: 6844897879987237189, guid: 89657c702d4e2b34e85463bc9b10a6f5,
+        type: 3}
+      propertyPath: surfaceDragModifiers
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6844897879987237189, guid: 89657c702d4e2b34e85463bc9b10a6f5,
+        type: 3}
+      propertyPath: turnPower
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6844897879987237189, guid: 89657c702d4e2b34e85463bc9b10a6f5,
+        type: 3}
+      propertyPath: carMaxVelocity
+      value: 7.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6844897880026246913, guid: 89657c702d4e2b34e85463bc9b10a6f5,
+        type: 3}
+      propertyPath: cameraController
+      value: 
+      objectReference: {fileID: 519420030}
+    - target: {fileID: 6844897880026246913, guid: 89657c702d4e2b34e85463bc9b10a6f5,
+        type: 3}
+      propertyPath: gameController
+      value: 
+      objectReference: {fileID: 1963401061}
+    - target: {fileID: 6844897880026246913, guid: 89657c702d4e2b34e85463bc9b10a6f5,
+        type: 3}
+      propertyPath: defaultButtonPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6844897879987237188, guid: 89657c702d4e2b34e85463bc9b10a6f5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -729,26 +764,46 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
       objectReference: {fileID: 0}
-    - target: {fileID: 6844897879987237189, guid: 89657c702d4e2b34e85463bc9b10a6f5,
+    - target: {fileID: 6844897879987237562, guid: 89657c702d4e2b34e85463bc9b10a6f5,
         type: 3}
-      propertyPath: gameController
-      value: 
-      objectReference: {fileID: 1963401061}
-    - target: {fileID: 6844897879987237189, guid: 89657c702d4e2b34e85463bc9b10a6f5,
+      propertyPath: m_AngularDrag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6844897880026246924, guid: 89657c702d4e2b34e85463bc9b10a6f5,
         type: 3}
-      propertyPath: surfaceDragModifiers
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6844897880026246924, guid: 89657c702d4e2b34e85463bc9b10a6f5,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6844897880026246924, guid: 89657c702d4e2b34e85463bc9b10a6f5,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6844897880026246914, guid: 89657c702d4e2b34e85463bc9b10a6f5,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.15686275
+      objectReference: {fileID: 0}
+    - target: {fileID: 6844897880026246914, guid: 89657c702d4e2b34e85463bc9b10a6f5,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.10215378
+      objectReference: {fileID: 0}
+    - target: {fileID: 6844897880026246914, guid: 89657c702d4e2b34e85463bc9b10a6f5,
+        type: 3}
+      propertyPath: m_Color.g
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 6844897880026246913, guid: 89657c702d4e2b34e85463bc9b10a6f5,
+    - target: {fileID: 6844897880026246914, guid: 89657c702d4e2b34e85463bc9b10a6f5,
         type: 3}
-      propertyPath: cameraController
-      value: 
-      objectReference: {fileID: 519420030}
-    - target: {fileID: 6844897880026246913, guid: 89657c702d4e2b34e85463bc9b10a6f5,
-        type: 3}
-      propertyPath: gameController
-      value: 
-      objectReference: {fileID: 1963401061}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89657c702d4e2b34e85463bc9b10a6f5, type: 3}
 --- !u!1001 &8264161358158717373
@@ -762,6 +817,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Main Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 8264161358459361731, guid: 9b957d2de766e344895487c7c2548429,
+        type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 32853501}
+    - target: {fileID: 8264161358459361731, guid: 9b957d2de766e344895487c7c2548429,
+        type: 3}
+      propertyPath: cameraRotationSpeed
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8264161358459361597, guid: 9b957d2de766e344895487c7c2548429,
         type: 3}
@@ -818,10 +883,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8264161358459361731, guid: 9b957d2de766e344895487c7c2548429,
+    - target: {fileID: 8264161358459361730, guid: 9b957d2de766e344895487c7c2548429,
         type: 3}
-      propertyPath: target
-      value: 
-      objectReference: {fileID: 32853501}
+      propertyPath: orthographic size
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b957d2de766e344895487c7c2548429, type: 3}

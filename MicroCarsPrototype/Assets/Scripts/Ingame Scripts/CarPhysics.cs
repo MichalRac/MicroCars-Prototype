@@ -11,6 +11,7 @@ public class CarPhysics : MonoBehaviour {
 
     [Header("Speed and swipe turning options")]
     public float carSpeed = 0.0f;
+    public float carMaxVelocity = 7.5f;
     public float turnPower = 5.0f;
     public float turnSwipeResponsivness = 1.0f;
     public float breaksPower = 3.0f;
@@ -25,8 +26,7 @@ public class CarPhysics : MonoBehaviour {
     private GameController gameController;
 
 
-    // TODO?: REWORK ALL THOSE GOD FORSAKEN COROUTINES INTO INVOKES?
-
+   
 
     private void Start()
     {
@@ -34,6 +34,13 @@ public class CarPhysics : MonoBehaviour {
 
         gameController = FindObjectOfType<GameController>();
         defaultAngularDrag = rb2D.angularDrag;
+    }
+
+    private void Update()
+    {
+        Debug.Log(rb2D.velocity.magnitude);
+        if (rb2D.velocity.magnitude > carMaxVelocity)
+            rb2D.velocity = rb2D.velocity.normalized * carMaxVelocity;
     }
 
     public void Move(float moveForce)
@@ -170,6 +177,8 @@ public class CarPhysics : MonoBehaviour {
     {
         rb2D.angularDrag = defaultAngularDrag;
     }
+    
+    
 
 
 }
