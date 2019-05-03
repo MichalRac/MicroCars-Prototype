@@ -687,17 +687,22 @@ PrefabInstance:
     - target: {fileID: 6844897879987237189, guid: 89657c702d4e2b34e85463bc9b10a6f5,
         type: 3}
       propertyPath: turnPower
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6844897879987237189, guid: 89657c702d4e2b34e85463bc9b10a6f5,
         type: 3}
       propertyPath: carMaxVelocity
-      value: 5
+      value: 7.5
       objectReference: {fileID: 0}
     - target: {fileID: 6844897879987237189, guid: 89657c702d4e2b34e85463bc9b10a6f5,
         type: 3}
       propertyPath: firstSlowTimeDelay
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6844897879987237189, guid: 89657c702d4e2b34e85463bc9b10a6f5,
+        type: 3}
+      propertyPath: breaksPower
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6844897880026246913, guid: 89657c702d4e2b34e85463bc9b10a6f5,
         type: 3}
