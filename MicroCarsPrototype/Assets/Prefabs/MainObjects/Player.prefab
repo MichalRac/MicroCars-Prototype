@@ -90,6 +90,7 @@ GameObject:
   - component: {fileID: 6844897879987237188}
   - component: {fileID: 6844897879987237562}
   - component: {fileID: 6844897879987237189}
+  - component: {fileID: 8415777828755559679}
   - component: {fileID: 6844897879987237563}
   m_Layer: 0
   m_Name: Player
@@ -149,15 +150,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   carSpeed: 150
+  carMaxVelocity: 7.5
   turnPower: 10
   turnSwipeResponsivness: 1
   breaksPower: 3
   deltaDragPower: 1
   deltaDragTime: 0.5
-  firstSlowTime: 0.5
+  firstSlowTimeDelay: 0.5
   surfaceDragModifiers: 1
-  gameController: {fileID: 262699034891333964, guid: 38d0f2712b0fb24468a57c3854ac80db,
-    type: 3}
+--- !u!114 &8415777828755559679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6844897879987237191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cadf7530be8363e4bb3725578578caf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  carSpeed: 0
+  carMaxVelocity: 7.5
+  turnPower: 5
+  turnSwipeResponsivness: 1
+  breaksPower: 3
+  deltaDragPower: 0.5
+  deltaDragTime: 0.5
+  firstSlowTimeDelay: 0.5
+  surfaceDragModifiers: 1
 --- !u!61 &6844897879987237563
 BoxCollider2D:
   m_ObjectHideFlags: 0

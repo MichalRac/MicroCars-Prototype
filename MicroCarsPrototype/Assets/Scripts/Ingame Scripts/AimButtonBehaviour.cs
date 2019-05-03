@@ -28,13 +28,13 @@ public class AimButtonBehaviour : MonoBehaviour {
     /// for deciding when we can actually aim.
     /// </summary>
 
+
+
     private void Awake()
     {
         aimButton = GetComponent<Transform>();
     }
 
-
-    // Utility methods
 
     public void resetPosition()
     {
@@ -43,6 +43,7 @@ public class AimButtonBehaviour : MonoBehaviour {
         aimDirectionAsset.localPosition = -defaultButtonPosition;
         ghostCar.localPosition = Vector2.zero;
     }
+
 
     public void resetRotation()
     {
@@ -56,6 +57,7 @@ public class AimButtonBehaviour : MonoBehaviour {
         cameraController.fixCamera();
     }
 
+
     public float calculatePower()
     {
         float aimPower = Vector2.Distance(aimButton.position, player.transform.position);
@@ -65,6 +67,7 @@ public class AimButtonBehaviour : MonoBehaviour {
 
         return aimPower;
     }
+
 
     public void displayAimAssets(bool setDisplay)
     {
@@ -80,9 +83,7 @@ public class AimButtonBehaviour : MonoBehaviour {
     }
 
 
-    
     // Two methods below are used by event system when AimButton is held down (event system)
-
     public void moveAimButtonToTouchPosition ()
     {
         //Finding input position and moving the aim button there
@@ -90,6 +91,7 @@ public class AimButtonBehaviour : MonoBehaviour {
         aimButton.position = touchPoint;
         moveDirectionArrow();
 	}
+
 
     // TODO: Make it so that holding button on either side of the screen slowly rotates the view
     public void moveDirectionArrow()
@@ -121,9 +123,7 @@ public class AimButtonBehaviour : MonoBehaviour {
     }
 
 
-
     //Two methods below are used by event system when AimButton has stopped being pressed (event system)
-
     public void onAimRelease()
     {
         if (calculatePower() == 0)
@@ -145,6 +145,8 @@ public class AimButtonBehaviour : MonoBehaviour {
         StartCoroutine("moveNextFrame");
     }
 
+
+
     public IEnumerator moveNextFrame()
     {
         yield return null;
@@ -155,7 +157,6 @@ public class AimButtonBehaviour : MonoBehaviour {
         // Before finishing this coroutine we start another which will be waiting for the movement to stop.
         carPhysics.StartCoroutine("startNextTurnWhenStopped");
     }
-
 
 
 }

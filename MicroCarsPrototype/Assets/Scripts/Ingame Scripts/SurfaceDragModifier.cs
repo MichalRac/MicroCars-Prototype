@@ -5,18 +5,18 @@ using UnityEngine;
 public class SurfaceDragModifier : MonoBehaviour
 {
     public float modifier;
-    public CarPhysics playerCarPhysics;
+    public CarDynamicDrag carDynamicDrag;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("EnteredTrigger");
-        playerCarPhysics.surfaceDragModifiers *= modifier;
+        carDynamicDrag.surfaceDragModifiers *= modifier;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         Debug.Log("ExitedTrigger");
-        playerCarPhysics.surfaceDragModifiers /= modifier;
+        carDynamicDrag.surfaceDragModifiers /= modifier;
     }
 
 }

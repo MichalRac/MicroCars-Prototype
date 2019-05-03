@@ -9,11 +9,14 @@ public class UISceneControler : MonoBehaviour {
     public Text turnInfo;
     private int tries = 0;
 
+
+
     public void addOneTry()
     {
         tries++;
         triesTextObject.text = "<size=15>Tries:</size>" + tries; 
     }
+
 
     public void switchTurnInfo(bool target)
     {

@@ -32,7 +32,7 @@ public class GameController : MonoBehaviour
 
     public void setupLevel()
     {
-        findStartPos();
+        findCarStartPositions();
         for (int i = 0; i < startingPosition.Length; i++)
         {
             if (cars[i] == null)
@@ -49,7 +49,8 @@ public class GameController : MonoBehaviour
         StartAimingTurn();
     }
 
-    private void findStartPos() // There should be a better way to do this than by searching the level gameObject by name I think.
+
+    private void findCarStartPositions() // There should be a better way to do this than by searching the level gameObject by name I think.
     {
         Transform[] startPosTransforms = currentLevel.GetComponentsInChildren<Transform>();
         foreach (Transform p in startPosTransforms)
@@ -69,21 +70,25 @@ public class GameController : MonoBehaviour
         aimButtonBehaviour.showAimButton();
     }
 
+
     public void switchTurnState(bool target)
     {
         isPlayerTurn = target;
         uiSceneControler.switchTurnInfo(isPlayerTurn);
     }
 
+
     public void addOneTryCount()
     {
         uiSceneControler.addOneTry();
     }
 
+
     public bool getIsPlayerTurn()
     {
         return isPlayerTurn;
     }
+
 
     public void nextLevel()
     {

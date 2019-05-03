@@ -12,6 +12,8 @@ public class CustomTileEffectors : MonoBehaviour
     public float turnTime;
     public float effectorAngle;
 
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +21,6 @@ public class CustomTileEffectors : MonoBehaviour
     }
 
     
-
     private void OnTriggerStay2D(Collider2D collision)
     {
         Debug.Log("TileEffector TriggerEnter");
@@ -35,6 +36,7 @@ public class CustomTileEffectors : MonoBehaviour
             carPhysicsScript.Move(accelaratePower);
         }
     }
+
 
     private void OnTriggerExit2D(Collider2D collision)
     {
