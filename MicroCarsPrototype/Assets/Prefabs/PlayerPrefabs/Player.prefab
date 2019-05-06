@@ -1,0 +1,163 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2823979102422149737
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2823979102422149746}
+  - component: {fileID: 2823979102422149747}
+  - component: {fileID: 2823979102422149744}
+  - component: {fileID: 2823979102422149745}
+  - component: {fileID: 2823979102422149748}
+  - component: {fileID: 2823979102422149749}
+  - component: {fileID: 2823979102422149750}
+  - component: {fileID: 2823979102422149751}
+  - component: {fileID: 2823979102422149736}
+  m_Layer: 0
+  m_Name: Player
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2823979102422149746
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2823979102422149737}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.6523072, y: -0.42723268, z: -0.03328046}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &2823979102422149747
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2823979102422149737}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &2823979102422149744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2823979102422149737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0bf2c852cd7fa74398f0295e5f175e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2823979102422149745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2823979102422149737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bf8483587b109e46b839a958ebcef9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  carSpeed: 150
+  carMaxVelocity: 7.5
+--- !u!114 &2823979102422149748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2823979102422149737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a8b6d29293493749ab676b5005e3701, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deltaDragPower: 0.5
+  deltaDragTime: 0.5
+  firstSlowTimeDelay: 0.5
+  surfaceDragModifiers: 1
+--- !u!114 &2823979102422149749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2823979102422149737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aab5f2141075abe40a436749bcdae4b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turnPower: 5
+  turnSwipeResponsivness: 1
+--- !u!114 &2823979102422149750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2823979102422149737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e8120207c09c8648912174201ba24f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  breaksPower: 3
+--- !u!114 &2823979102422149751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2823979102422149737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e23474278610c5643b537727ba43747b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2823979102422149736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2823979102422149737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a53d682100ce64438f2da88fd241fa8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  car: {fileID: 374024956759447148, guid: 2f4214332d0b76a4897afc15f0ad64e9, type: 3}
+  ghostCar: {fileID: 5299753548000142913, guid: 860751bc9978a18408a63416597df0c9,
+    type: 3}
+  aimArrow: {fileID: 2985132005865369819, guid: b2bf5cddfa20a8a41acea98618ecf6d1,
+    type: 3}
+  aimCanvas: {fileID: 679268706212177474, guid: f732aa2d61e396c44857b6ac7081d180,
+    type: 3}
+  aimButton: {fileID: 0}
+  defaultButtonPosition: {x: 0, y: 0}

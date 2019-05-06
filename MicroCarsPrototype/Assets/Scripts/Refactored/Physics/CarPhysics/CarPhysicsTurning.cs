@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class CarPhysicsTurning : CarPhysicsRoot
 {
-    protected float turnPower = 5.0f;
-    protected float turnSwipeResponsivness = 1.0f;
+    [SerializeField]
+    private float turnPower = 5.0f;
+    [SerializeField]
+    private float turnSwipeResponsivness = 1.0f;
+
 
 
     public void SwipeAction(string direction, float swipeLenght)
@@ -24,6 +27,34 @@ public class CarPhysicsTurning : CarPhysicsRoot
             rb2D.AddTorque(-turnPower /* * (swipeLenght * turnSwipeResponsivness) */);
             StartCoroutine(carMovement.maintainVelocityRotation());
         }
+    }
+
+
+
+    public void triggerCustomTurnEffect(float turnDurationSec, float targetAngle){
+        StartCoroutine(customTurnEffect(turnDurationSec, targetAngle));
+    }
+
+    public IEnumerator customTurnEffect(float turnDurationSec, float targetAngle)
+    {
+
+        Quaternion targetRotation = Quaternion.Euler(0.0f, 0.0f, targetAngle);
+        float angleDifference = Quaternion.Angle(gameObject.transform.rotation, targetRotation);
+
+        float timeElapsed = 0.0f;
+
+        while (Quaternion.Angle(gameObject.transform.rotation, targetRotation) > 0.001f)
+        {
+
+            Debug.Log(timeElapsed);
+            timeElapsed += Time.fixedDeltaTime;
+
+            float deltaAngle = angleDifference * (Time.fixedDeltaTime / turnDurationSec);
+            gameObject.transform.rotation = Quaternion.RotateTowards(gameObject.transform.rotation, targetRotation, deltaAngle);
+            yield return new WaitForFixedUpdate();
+
+        }
+
     }
 
 }
