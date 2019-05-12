@@ -17,12 +17,12 @@ public class CarPhysicsMovement : CarPhysicsRoot
         base.stateIsMoving = true;
         rb2D.AddRelativeForce(moveForceVector);
 
-        StartCoroutine(base.carDynamicDrag.startDynamicDrag());
+        StartCoroutine(base.carDynamicDrag.StartDynamicDrag());
 
-        StartCoroutine(maintainVelocityRotation());
+        StartCoroutine(MaintainVelocityRotation());
     }
 
-    public IEnumerator maintainVelocityRotation()
+    public IEnumerator MaintainVelocityRotation()
     {
         while (rb2D.velocity.magnitude > minMovingSpeed)
         {

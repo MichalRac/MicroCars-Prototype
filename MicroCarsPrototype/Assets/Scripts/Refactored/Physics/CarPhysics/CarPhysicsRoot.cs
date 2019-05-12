@@ -7,7 +7,7 @@ using UnityEngine;
 [RequireComponent(typeof(CarPhysicsTurning))]
 [RequireComponent(typeof(CarPhysicsBraking))]
 [RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(AimButtonBehaviourRoot))]
+[RequireComponent(typeof(AimingRoot))]
 
 public class CarPhysicsRoot : MonoBehaviour
 {
@@ -37,12 +37,12 @@ public class CarPhysicsRoot : MonoBehaviour
         defaultAngularDrag = rb2D.angularDrag;
     }
 
-    public void initializeMovement(float moveForce)
+    public void InitializeMovement(float moveForce)
     {
         carMovement.Move(moveForce);
     }
 
-    public IEnumerator startNextTurnWhenStopped()
+    public IEnumerator StartNextTurnWhenStopped()
     {
         yield return new WaitForSeconds(1);      // Because coroutine ended up being called before any actual movement was applied resulting in bugs xd
 

@@ -19,23 +19,23 @@ public class CarPhysicsTurning : CarPhysicsRoot
         if (direction == "left")
         {
             rb2D.AddTorque(turnPower /* * (swipeLenght * turnSwipeResponsivness) */);
-            StartCoroutine(carMovement.maintainVelocityRotation());
+            StartCoroutine(carMovement.MaintainVelocityRotation());
         }
 
         else if (direction == "right")
         {
             rb2D.AddTorque(-turnPower /* * (swipeLenght * turnSwipeResponsivness) */);
-            StartCoroutine(carMovement.maintainVelocityRotation());
+            StartCoroutine(carMovement.MaintainVelocityRotation());
         }
     }
 
 
 
-    public void triggerCustomTurnEffect(float turnDurationSec, float targetAngle){
-        StartCoroutine(customTurnEffect(turnDurationSec, targetAngle));
+    public void TriggerCustomTurnEffect(float turnDurationSec, float targetAngle){
+        StartCoroutine(CustomTurnEffect(turnDurationSec, targetAngle));
     }
 
-    public IEnumerator customTurnEffect(float turnDurationSec, float targetAngle)
+    public IEnumerator CustomTurnEffect(float turnDurationSec, float targetAngle)
     {
 
         Quaternion targetRotation = Quaternion.Euler(0.0f, 0.0f, targetAngle);

@@ -14,7 +14,7 @@ public class CarPhysicsDynamicDrag : CarPhysicsRoot
     [SerializeField]
     private float surfaceDragModifiers = 1;
 
-    public IEnumerator startDynamicDrag()
+    public IEnumerator StartDynamicDrag()
     {
         float defaultDrag = rb2D.drag;
         bool gotBelowSlowDownValue = false;
