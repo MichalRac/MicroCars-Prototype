@@ -58,8 +58,8 @@ public class CarPhysicsRoot : MonoBehaviour
 
 
         stateIsMoving = false;
-        gameController.switchTurnState(false);
-        gameController.StartAimingTurn();
+        //gameController.switchTurnState(false);
+        //gameController.StartAimingTurn();
 
     }
 }

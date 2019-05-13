@@ -10,7 +10,6 @@ public class CarPhysicsTurning : CarPhysicsRoot
     private float turnSwipeResponsivness = 1.0f;
 
 
-
     public void SwipeAction(string direction, float swipeLenght)
     {
         if (stateIsMoving == false)
@@ -27,17 +26,16 @@ public class CarPhysicsTurning : CarPhysicsRoot
             rb2D.AddTorque(-turnPower /* * (swipeLenght * turnSwipeResponsivness) */);
             StartCoroutine(carMovement.MaintainVelocityRotation());
         }
+
     }
 
-
-
-    public void TriggerCustomTurnEffect(float turnDurationSec, float targetAngle){
+    public void TriggerCustomTurnEffect(float turnDurationSec, float targetAngle)
+    {
         StartCoroutine(CustomTurnEffect(turnDurationSec, targetAngle));
     }
 
     public IEnumerator CustomTurnEffect(float turnDurationSec, float targetAngle)
     {
-
         Quaternion targetRotation = Quaternion.Euler(0.0f, 0.0f, targetAngle);
         float angleDifference = Quaternion.Angle(gameObject.transform.rotation, targetRotation);
 
@@ -54,7 +52,6 @@ public class CarPhysicsTurning : CarPhysicsRoot
             yield return new WaitForFixedUpdate();
 
         }
-
     }
 
 }

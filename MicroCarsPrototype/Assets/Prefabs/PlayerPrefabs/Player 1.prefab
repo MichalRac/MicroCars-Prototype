@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2461356380534586936}
+  - component: {fileID: 7966012228368648591}
   - component: {fileID: 1996463733407601197}
   - component: {fileID: 1650458484879803548}
   - component: {fileID: 5164372255071004561}
@@ -32,13 +33,25 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4012538024353942121}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -25.32955, y: 30.990595, z: -3.4702709}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7288800078413433736}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7966012228368648591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4012538024353942121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3612f5da7e23f1429078d01098a3aff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1996463733407601197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,8 +150,7 @@ MonoBehaviour:
     type: 3}
   aimArrow: {fileID: 2985132005865369819, guid: b2bf5cddfa20a8a41acea98618ecf6d1,
     type: 3}
-  aimButton: {fileID: 3526092904215903555, guid: f21b0f38a04f2434b890bd44140c9fc2,
-    type: 3}
+  aimButton: {fileID: 4607833417469810382}
   defaultButtonPosition: {x: 0, y: 0}
 --- !u!50 &3109431433610702478
 Rigidbody2D:
@@ -172,6 +184,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AimButtonArea
+      objectReference: {fileID: 0}
+    - target: {fileID: 3526092904215903555, guid: f21b0f38a04f2434b890bd44140c9fc2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3986639475059954126, guid: f21b0f38a04f2434b890bd44140c9fc2,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.3372549
       objectReference: {fileID: 0}
     - target: {fileID: 5643984228114969777, guid: f21b0f38a04f2434b890bd44140c9fc2,
         type: 3}
@@ -231,22 +253,22 @@ PrefabInstance:
     - target: {fileID: 5643984228114969777, guid: f21b0f38a04f2434b890bd44140c9fc2,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.330189
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5643984228114969777, guid: f21b0f38a04f2434b890bd44140c9fc2,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 3.5534596
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5643984228114969777, guid: f21b0f38a04f2434b890bd44140c9fc2,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1000
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5643984228114969777, guid: f21b0f38a04f2434b890bd44140c9fc2,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 1000
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5643984228114969777, guid: f21b0f38a04f2434b890bd44140c9fc2,
         type: 3}
@@ -315,6 +337,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f21b0f38a04f2434b890bd44140c9fc2, type: 3}
+--- !u!1 &4607833417469810382 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3526092904215903555, guid: f21b0f38a04f2434b890bd44140c9fc2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1089135278991747981}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4927054877857564293
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -29,13 +29,6 @@ public class AimingPositioning : MonoBehaviour
         }
     }
 
-    public GameObject Player
-    {
-        get
-        {
-            return player;
-        }
-    }
 
     private void Start()
     {
@@ -49,6 +42,8 @@ public class AimingPositioning : MonoBehaviour
 
         aimArrow = Instantiate(aimArrow, transform) as GameObject;
         aimArrow.SetActive(false);
+
+        aimButton = gameObject.transform.Find("AimButtonArea").gameObject;
     }
 
     public void ResetPosition()
@@ -66,7 +61,7 @@ public class AimingPositioning : MonoBehaviour
 
         ghostCar.transform.localRotation = reset;
         car.transform.localRotation = reset;
-        Player.transform.rotation = tagetRotation;
+        gameObject.transform.rotation = tagetRotation;
 
         //cameraController.fixCamera();     //Not working after refactor, as camera rotation fixing is no longer needed.
     }
@@ -74,7 +69,8 @@ public class AimingPositioning : MonoBehaviour
     public void MoveAimToPointer()
     {
         Vector2 touchPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        AimButton.transform.position = touchPoint;
+        Debug.Log(touchPoint);
+        AimButton.transform.localPosition = touchPoint;
         MoveDirectionArrow();
     }
 
@@ -94,12 +90,35 @@ public class AimingPositioning : MonoBehaviour
         return power;
     }
 
+    public void onAimRelease()
+    {
+        if (CalculatePower() == 0)
+        {
+            ResetPosition();
+            ResetRotation();
+            return;
+        }
+
+
+
+        DisplayAimAssets(false);
+        ResetRotation();
+        //gameController.addOneTryCount();
+        //gameController.switchTurnState(false);
+
+        //Since the resetRotation() didn't apply fast enough, I had to delay the actual movement until next frame
+        //TODO: Try to make this work without the need of coroutine
+        StartCoroutine("moveNextFrame");
+    }
+
     public void DisplayAimAssets(bool setDisplay)
     {
 
         aimArrow.transform.gameObject.SetActive(setDisplay);
         ghostCar.gameObject.SetActive(setDisplay);
     }
+
+
 
 
     public void ShowAimButton()
@@ -145,4 +164,16 @@ public class AimingPositioning : MonoBehaviour
         return aimPower;
     }
 
+    
+    public IEnumerator moveNextFrame()
+    {
+        yield return null;
+        gameObject.GetComponent<CarPhysicsRoot>().InitializeMovement(CalculatePower());
+        ResetPosition();
+        aimButton.gameObject.SetActive(false);
+
+        // Before finishing this coroutine we start another which will be waiting for the movement to stop.
+        gameObject.GetComponent<CarPhysicsRoot>().StartCoroutine("StartNextTurnWhenStopped");
+    }
+    
 }
