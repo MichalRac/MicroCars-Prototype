@@ -14,7 +14,6 @@ public class CarPhysicsMovement : CarPhysicsRoot
     public void Move(float moveForce)
     {
         Vector2 moveForceVector = new Vector2(0.0f, moveForce * carSpeed);
-        base.stateIsMoving = true;
         rb2D.AddRelativeForce(moveForceVector);
 
         StartCoroutine(base.carDynamicDrag.StartDynamicDrag());

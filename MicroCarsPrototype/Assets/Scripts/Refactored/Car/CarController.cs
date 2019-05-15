@@ -6,6 +6,7 @@ public delegate void OnTurnEndCallback();
 
 [RequireComponent(typeof(CarPhysicsRoot))]
 [RequireComponent(typeof(AimingRoot))]
+[RequireComponent(typeof(CarStates))]
 public class CarController : MonoBehaviour
 {
 

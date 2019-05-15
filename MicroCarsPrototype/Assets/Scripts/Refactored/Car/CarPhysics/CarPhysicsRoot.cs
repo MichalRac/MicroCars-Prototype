@@ -8,7 +8,6 @@ using UnityEngine;
 [RequireComponent(typeof(CarPhysicsBraking))]
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(AimingRoot))]
-
 public class CarPhysicsRoot : MonoBehaviour
 {
     protected const float minMovingSpeed = 0.001f;
@@ -20,8 +19,7 @@ public class CarPhysicsRoot : MonoBehaviour
     protected CarPhysicsBraking carBraking;
     protected Rigidbody2D rb2D;
     protected GameController gameController;
-
-    protected bool stateIsMoving = false;
+    private CarStates states;
 
     private float defaultAngularDrag;
 
@@ -33,18 +31,25 @@ public class CarPhysicsRoot : MonoBehaviour
         carTurning = GetComponent<CarPhysicsTurning>();
         carBraking = GetComponent<CarPhysicsBraking>();
         rb2D = GetComponent<Rigidbody2D>();
+        states = GetComponent<CarStates>();
 
         defaultAngularDrag = rb2D.angularDrag;
     }
 
     public void InitializeMovement(float moveForce)
     {
+        states.IsMoving = true;
         carMovement.Move(moveForce);
+    }
+
+    public void InitializeSwipe(string direction, float lenght)
+    {
+        carTurning.SwipeAction(direction, lenght);
     }
 
     public IEnumerator StartNextTurnWhenStopped()
     {
-        yield return new WaitForSeconds(1);      // Because coroutine ended up being called before any actual movement was applied resulting in bugs xd
+        yield return new WaitForSeconds(1);      // Because coroutine ended up being called before any actual movement was applied resulting in bugs
 
         while (rb2D.velocity.magnitude >= minMovingSpeed)
         {
@@ -57,9 +62,16 @@ public class CarPhysicsRoot : MonoBehaviour
         yield return null;                      // So that the angularVelocity is applied for sure before we change the game state.
 
 
-        stateIsMoving = false;
+        states.IsMoving = false;
         //gameController.switchTurnState(false);
         //gameController.StartAimingTurn();
 
     }
+    /*
+    private void Update()
+    {
+        Debug.Log(stateIsMoving);
+    }
+    */
+
 }

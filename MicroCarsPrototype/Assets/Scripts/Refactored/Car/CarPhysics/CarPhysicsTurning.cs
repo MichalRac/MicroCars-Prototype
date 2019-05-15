@@ -2,29 +2,42 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CarPhysicsTurning : CarPhysicsRoot
+public class CarPhysicsTurning : MonoBehaviour
 {
     [SerializeField]
     private float turnPower = 5.0f;
     [SerializeField]
     private float turnSwipeResponsivness = 1.0f;
 
+    private CarStates states;
+    private CarPhysicsMovement movement;
+    private Rigidbody2D rb2D;
+
+
+    private void Start()
+    {
+        states = GetComponent<CarStates>();
+        movement = GetComponent<CarPhysicsMovement>();
+        rb2D = GetComponent<Rigidbody2D>();
+    }
+
 
     public void SwipeAction(string direction, float swipeLenght)
     {
-        if (stateIsMoving == false)
+        Debug.Log(states.IsMoving);
+        if (states.IsMoving == false)
             return;
 
         if (direction == "left")
         {
             rb2D.AddTorque(turnPower /* * (swipeLenght * turnSwipeResponsivness) */);
-            StartCoroutine(carMovement.MaintainVelocityRotation());
+            StartCoroutine(movement.MaintainVelocityRotation());
         }
 
         else if (direction == "right")
         {
             rb2D.AddTorque(-turnPower /* * (swipeLenght * turnSwipeResponsivness) */);
-            StartCoroutine(carMovement.MaintainVelocityRotation());
+            StartCoroutine(movement.MaintainVelocityRotation());
         }
 
     }
