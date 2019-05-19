@@ -193,11 +193,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2461356380534586936}
     m_Modifications:
-    - target: {fileID: 679268706212177474, guid: f732aa2d61e396c44857b6ac7081d180,
-        type: 3}
-      propertyPath: m_Name
-      value: AimCanvas
-      objectReference: {fileID: 0}
     - target: {fileID: 2398007661210782989, guid: f732aa2d61e396c44857b6ac7081d180,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -302,6 +297,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 679268706212177474, guid: f732aa2d61e396c44857b6ac7081d180,
+        type: 3}
+      propertyPath: m_Name
+      value: AimCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8904243575646589003, guid: f732aa2d61e396c44857b6ac7081d180,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1929435302634664724, guid: f732aa2d61e396c44857b6ac7081d180,
         type: 3}

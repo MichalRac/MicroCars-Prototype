@@ -6,6 +6,7 @@ public class CarStates : MonoBehaviour
 {
     private bool isMoving;
     private bool isAiming;
+    private bool isTurn;
 
     public bool IsMoving
     {
@@ -34,6 +35,19 @@ public class CarStates : MonoBehaviour
                 return;
             isAiming = value;
             Debug.Log("Aiming state changed to: " + IsAiming);
+        }
+    }
+
+    public bool IsTurn
+    {
+        get
+        {
+            return isTurn;
+        }
+
+        set
+        {
+            isTurn = value;
         }
     }
 }

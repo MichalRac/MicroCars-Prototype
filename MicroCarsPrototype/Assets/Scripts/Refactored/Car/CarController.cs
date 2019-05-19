@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public delegate void OnTurnEndCallback();
+public delegate void OnAimFinishedCallback();
 
 [RequireComponent(typeof(CarPhysicsRoot))]
 [RequireComponent(typeof(AimingRoot))]
@@ -12,24 +12,43 @@ public class CarController : MonoBehaviour
 
     private CarPhysicsRoot carPhysics;
     private AimingRoot aiming;
+    private CarStates states;
 
-    public static OnTurnEndCallback onTurnEnd;
+    StartNextPlayerTurnCallback startNextPlayerTurnCallback;
+    public static OnAimFinishedCallback onAimFinished;
 
     // Start is called before the first frame update
     void Start()
     {
         carPhysics = GetComponent<CarPhysicsRoot>();
         aiming = GetComponent<AimingRoot>();
+        states = GetComponent<CarStates>();
 
-        onTurnEnd = () => Debug.Log("TurnFinished");
-
-        StartCarTurn();
+        onAimFinished = () => OnMovementFinished();
     }
 
-    public void StartCarTurn()
+    public void StartCarTurn(StartNextPlayerTurnCallback passedGameControllerCallback)
     {
+        states.IsTurn = true;
+        startNextPlayerTurnCallback = passedGameControllerCallback;
+        
+
         Debug.Log("AimingStarted");
-        aiming.AimStart(onTurnEnd);
+        aiming.AimStart(onAimFinished);
     }
 
+    public void OnMovementFinished()
+    {
+        FinishCarTurn();
+    }
+
+    public void FinishCarTurn()
+    {
+        startNextPlayerTurnCallback();
+    }
+
+    public void passGameControllerCallback(StartNextPlayerTurnCallback passedStartNextPlayerTurnCallback)
+    {
+        startNextPlayerTurnCallback = passedStartNextPlayerTurnCallback;
+    }
 }

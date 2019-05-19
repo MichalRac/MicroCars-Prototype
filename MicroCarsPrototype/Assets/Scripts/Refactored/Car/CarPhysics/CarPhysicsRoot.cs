@@ -49,6 +49,7 @@ public class CarPhysicsRoot : MonoBehaviour
 
     public IEnumerator StartNextTurnWhenStopped()
     {
+        Debug.Log("StartNextTurnWhenStopped initialized");
         yield return new WaitForSeconds(1);      // Because coroutine ended up being called before any actual movement was applied resulting in bugs
 
         while (rb2D.velocity.magnitude >= minMovingSpeed)

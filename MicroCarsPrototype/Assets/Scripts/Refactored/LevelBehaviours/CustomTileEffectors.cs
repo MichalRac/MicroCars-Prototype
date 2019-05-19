@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CustomTileEffectors : MonoBehaviour
 {
+    /*
     public GameObject player;
     private CarPhysics carPhysics;
     private GameObject effector;
@@ -43,5 +44,5 @@ public class CustomTileEffectors : MonoBehaviour
         carPhysics.StopCoroutine("customTurnEffect");
     }
 
-
+    */
 }

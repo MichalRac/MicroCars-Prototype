@@ -8,11 +8,12 @@ public class AimingRoot : MonoBehaviour
     
     [HideInInspector]
     private AimingPositioning positioning;
-    private bool stateIsAiming = false;
+    private CarStates states;
 
     private void Start()
     {
         positioning = GetComponent<AimingPositioning>();
+        states = GetComponent<CarStates>();
     }
 
     public void OnAimHold()
@@ -23,33 +24,33 @@ public class AimingRoot : MonoBehaviour
     public void OnAimRelease()
     {
         positioning.onAimRelease();
-        stateIsAiming = false;
+        states.IsAiming = false;
     }
 
     // AimStart
-    public void AimStart(OnTurnEndCallback onTurnEndCallback)
+    public void AimStart(OnAimFinishedCallback onAimFinishedCallback)
     {
-        stateIsAiming = true;
+        states.IsAiming = true;
         positioning.ShowAimButton();
 
-        StartCoroutine(aimingLifetime(onTurnEndCallback));
+        StartCoroutine(aimingLifetime(onAimFinishedCallback));
         
     }
 
     //AimDuration
-    private IEnumerator aimingLifetime(OnTurnEndCallback onTurnEndCallback)
+    private IEnumerator aimingLifetime(OnAimFinishedCallback onAimFinishedCallback)
     {
-        while(stateIsAiming)
+        while(states.IsAiming)
             yield return null;
 
-        AimEnd(onTurnEndCallback);
+        AimEnd(onAimFinishedCallback);
 
     }
     
     //AimEnd + Callback
-    private void AimEnd(OnTurnEndCallback onTurnEndCallback)
+    private void AimEnd(OnAimFinishedCallback onAimFinishedCallback)
     {
-        onTurnEndCallback();
+        onAimFinishedCallback();
     }
 
 }

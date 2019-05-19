@@ -109,7 +109,7 @@ public class AimingPositioning : MonoBehaviour
 
             //Since the resetRotation() didn't apply fast enough, I had to delay the actual movement until next frame
             //TODO: Try to make this work without the need of coroutine
-        StartCoroutine("moveNextFrame");
+        StartCoroutine(moveNextFrame());
     }
 
     public void DisplayAimAssets(bool setDisplay)
