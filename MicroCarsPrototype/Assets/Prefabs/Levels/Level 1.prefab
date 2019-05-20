@@ -3779,7 +3779,7 @@ Transform:
   m_GameObject: {fileID: 6096712866873061352}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 6096712865791125289}
   - {fileID: 6096712866025991387}
@@ -3795,11 +3795,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6096712866025991387}
     m_Modifications:
-    - target: {fileID: 6305224052847838593, guid: 71d47b980a3990d44a2eba996ef4c810,
-        type: 3}
-      propertyPath: m_Name
-      value: point
-      objectReference: {fileID: 0}
     - target: {fileID: 7317783058807687521, guid: 71d47b980a3990d44a2eba996ef4c810,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3855,6 +3850,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6305224052847838593, guid: 71d47b980a3990d44a2eba996ef4c810,
+        type: 3}
+      propertyPath: m_Name
+      value: point
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71d47b980a3990d44a2eba996ef4c810, type: 3}
 --- !u!1001 &7970416015655161752
@@ -3864,11 +3864,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6096712866800862444}
     m_Modifications:
-    - target: {fileID: 1972896439765929916, guid: d9040f4a113ae9d409159a510fa45888,
-        type: 3}
-      propertyPath: m_Name
-      value: EffectorResizable
-      objectReference: {fileID: 0}
     - target: {fileID: 5182999340073836455, guid: d9040f4a113ae9d409159a510fa45888,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3923,6 +3918,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1972896439765929916, guid: d9040f4a113ae9d409159a510fa45888,
+        type: 3}
+      propertyPath: m_Name
+      value: EffectorResizable
       objectReference: {fileID: 0}
     - target: {fileID: 8812101377191060249, guid: d9040f4a113ae9d409159a510fa45888,
         type: 3}

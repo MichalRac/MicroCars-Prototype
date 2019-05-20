@@ -6,7 +6,7 @@ namespace DigitalRubyShared
 {
     public class TouchBehaviour : MonoBehaviour
     {
-        public CarPhysics carPhysics;
+        public CarPhysicsRoot carPhysics;
         private SwipeGestureRecognizer swipeGesture;
         //private readonly List<Vector3> swipeLines = new List<Vector3>();
 
@@ -15,6 +15,7 @@ namespace DigitalRubyShared
         {
             CreateSwipeLeftGesture();
             CreateSwipeRightGesture();
+            
         }
 
         private void DebugText(string text, params object[] format)
@@ -42,7 +43,6 @@ namespace DigitalRubyShared
             FingersScript.Instance.AddGesture(swipeGesture);
         }
 
-
         private void SwipeLeftGestureCallback(GestureRecognizer gesture)
         {
             if (gesture.State == GestureRecognizerState.Ended)
@@ -50,7 +50,7 @@ namespace DigitalRubyShared
 
                 Debug.Log("SwipedLeft");
                 float swipeLenght = SwipeLenght(gesture.FocusX, gesture.FocusY);
-                carPhysics.SwipeAction("left", swipeLenght);
+                carPhysics.InitializeSwipe("left", swipeLenght);
                 
                 //HandleSwipe(gesture.FocusX, gesture.FocusY);
                 //DebugText("Swiped from {0},{1} to {2},{3}; velocity: {4}, {5}", gesture.StartFocusX, gesture.StartFocusY, gesture.FocusX, gesture.FocusY, swipeGesture.VelocityX, swipeGesture.VelocityY);
@@ -63,13 +63,12 @@ namespace DigitalRubyShared
             {
                 Debug.Log("SwipedRight");
                 float swipeLenght = SwipeLenght(gesture.FocusX, gesture.FocusY);
-                carPhysics.SwipeAction("right", swipeLenght);
+                carPhysics.InitializeSwipe("right", swipeLenght);
                 //HandleSwipe(gesture.FocusX, gesture.FocusY);
                 //DebugText("Swiped from {0},{1} to {2},{3}; velocity: {4}, {5}", gesture.StartFocusX, gesture.StartFocusY, gesture.FocusX, gesture.FocusY, swipeGesture.VelocityX, swipeGesture.VelocityY);
             }
         }
 
-        
         private float SwipeLenght(float endX, float endY)
         {
             Vector2 start = new Vector2(swipeGesture.StartFocusX, swipeGesture.StartFocusY);
