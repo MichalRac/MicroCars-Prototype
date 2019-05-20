@@ -10,6 +10,8 @@ public class AimingRoot : MonoBehaviour
     private AimingPositioning positioning;
     private CarStates states;
 
+    OnAimFinishedCallback onAimFinishedCallbackReference;
+
     private void Start()
     {
         positioning = GetComponent<AimingPositioning>();
@@ -28,29 +30,28 @@ public class AimingRoot : MonoBehaviour
     }
 
     // AimStart
-    public void AimStart(OnAimFinishedCallback onAimFinishedCallback)
+    public void AimStart()
     {
         states.IsAiming = true;
         positioning.ShowAimButton();
 
-        StartCoroutine(aimingLifetime(onAimFinishedCallback));
+        StartCoroutine(aimingLifetime());
         
     }
 
     //AimDuration
-    private IEnumerator aimingLifetime(OnAimFinishedCallback onAimFinishedCallback)
-    {
+    private IEnumerator aimingLifetime()
+    { 
         while(states.IsAiming)
             yield return null;
 
-        AimEnd(onAimFinishedCallback);
+        AimEnd();
 
     }
     
     //AimEnd + Callback
-    private void AimEnd(OnAimFinishedCallback onAimFinishedCallback)
+    private void AimEnd()
     {
-        onAimFinishedCallback();
     }
 
 }

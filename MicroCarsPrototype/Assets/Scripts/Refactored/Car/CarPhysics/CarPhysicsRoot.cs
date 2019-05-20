@@ -18,10 +18,24 @@ public class CarPhysicsRoot : MonoBehaviour
     protected CarPhysicsTurning carTurning;
     protected CarPhysicsBraking carBraking;
     protected Rigidbody2D rb2D;
-    protected GameController gameController;
     private CarStates states;
 
     private float defaultAngularDrag;
+
+    OnMovementFinishedCallback onMovementFinishedCallbackReference;
+
+    public OnMovementFinishedCallback OnMovementFinishedCallbackReference
+    {
+        get
+        {
+            return onMovementFinishedCallbackReference;
+        }
+
+        set
+        {
+            onMovementFinishedCallbackReference = value;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -64,6 +78,7 @@ public class CarPhysicsRoot : MonoBehaviour
 
 
         states.IsMoving = false;
+        onMovementFinishedCallbackReference();
         //gameController.switchTurnState(false);
         //gameController.StartAimingTurn();
 

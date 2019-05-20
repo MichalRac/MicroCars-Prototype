@@ -1,11 +1,13 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public delegate void StartNextPlayerTurnCallback();
+public delegate void OnTurnFinishedCallback();
 
 public class GameController : MonoBehaviour
 {
+
 
     public GameObject[] players;
     public GameObject[] levels;
@@ -14,16 +16,16 @@ public class GameController : MonoBehaviour
     private int currentPlayerId = 0;
     private bool placeholderAllPlayersFinished = false;
 
-    StartNextPlayerTurnCallback startNextPlayerTurnCallback;
+    OnTurnFinishedCallback onTurnFinishedCallback;
 
     private void Start()
     {
-        startIdCarTurn(0);
-        startNextPlayerTurnCallback = () => startIdCarTurn(0); //For now looping playerid[0] turn
+        onTurnFinishedCallback += startIdCarTurn;
+        startIdCarTurn();
     }
 
-    public void startIdCarTurn(int carID)
+    public void startIdCarTurn() //For now looping playerid[0] turn
     {
-        players[carID].GetComponent<CarController>().StartCarTurn(startNextPlayerTurnCallback);
+        players[0].GetComponent<CarController>().StartCarTurn(onTurnFinishedCallback);
     }
 }
