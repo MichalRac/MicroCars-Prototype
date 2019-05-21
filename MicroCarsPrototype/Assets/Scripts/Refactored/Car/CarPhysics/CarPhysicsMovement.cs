@@ -8,7 +8,7 @@ public class CarPhysicsMovement : CarPhysicsRoot
     [SerializeField]
     private float carSpeed = 0.0f;
     [SerializeField]
-    private float carMaxVelocity = 7.5f;
+    private float carMaxVelocityMagnitude = 7.5f;
 
     
     public void Move(float moveForce)
@@ -34,4 +34,11 @@ public class CarPhysicsMovement : CarPhysicsRoot
 
     }
 
+    private void Update()
+    {
+        if(rb2D.velocity.magnitude > carMaxVelocityMagnitude)
+        {
+            rb2D.velocity = rb2D.velocity.normalized * carMaxVelocityMagnitude;
+        }
+    }
 }

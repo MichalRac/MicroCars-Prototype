@@ -125,6 +125,8 @@ GameObject:
   - component: {fileID: 346986073}
   - component: {fileID: 346986076}
   - component: {fileID: 346986077}
+  - component: {fileID: 346986079}
+  - component: {fileID: 346986078}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -210,6 +212,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 762474463}
   cameraRotationSpeed: 0
+  cameraSpeed: 0.5
 --- !u!114 &346986077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,6 +228,37 @@ MonoBehaviour:
   players:
   - {fileID: 762474463}
   levels: []
+--- !u!114 &346986078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 346986072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98498814169e7234da5ccbaeb66efb7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  carPhysics: {fileID: 762474471}
+--- !u!114 &346986079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 346986072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08baa3d19a3754108af85534c7824251, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TreatMousePointerAsFinger: 1
+  SimulateMouseWithTouches: 0
+  RequireControlKeyForMouseZoom: 1
+  PassThroughObjects: []
+  DefaultDPI: 200
+  LevelUnloadOption: 2
 --- !u!1001 &723933682
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -307,7 +341,9 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6096712865760106071, guid: 4a2f2d0206ee9db4f9fd64666468962e, type: 3}
+    - {fileID: 6096712866188024604, guid: 4a2f2d0206ee9db4f9fd64666468962e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4a2f2d0206ee9db4f9fd64666468962e, type: 3}
 --- !u!1 &762474463 stripped
 GameObject:
@@ -315,6 +351,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2000268509}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &762474471 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1996463733407601197, guid: 3dfbe4d5aa49d624ebed1c76849973ff,
+    type: 3}
+  m_PrefabInstance: {fileID: 2000268509}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 762474463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0bf2c852cd7fa74398f0295e5f175e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1609914678
 GameObject:
   m_ObjectHideFlags: 0
@@ -493,5 +541,22 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 0.1254902
       objectReference: {fileID: 0}
+    - target: {fileID: 2159401398751520167, guid: 3dfbe4d5aa49d624ebed1c76849973ff,
+        type: 3}
+      propertyPath: turnPower
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7966012228368648591, guid: 3dfbe4d5aa49d624ebed1c76849973ff,
+        type: 3}
+      propertyPath: car
+      value: 
+      objectReference: {fileID: 374024956759447148, guid: 2f4214332d0b76a4897afc15f0ad64e9,
+        type: 3}
+    - target: {fileID: 7966012228368648591, guid: 3dfbe4d5aa49d624ebed1c76849973ff,
+        type: 3}
+      propertyPath: ghostCar
+      value: 
+      objectReference: {fileID: 5299753548000142913, guid: 860751bc9978a18408a63416597df0c9,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3dfbe4d5aa49d624ebed1c76849973ff, type: 3}

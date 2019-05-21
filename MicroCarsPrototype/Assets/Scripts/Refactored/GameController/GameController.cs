@@ -7,8 +7,6 @@ public delegate void OnTurnFinishedCallback();
 
 public class GameController : MonoBehaviour
 {
-
-
     public GameObject[] players;
     public GameObject[] levels;
 

@@ -18,38 +18,39 @@ public class AimingRoot : MonoBehaviour
         states = GetComponent<CarStates>();
     }
 
+    public void AimTurnStart()
+    {
+        states.IsAiming = true;
+        positioning.ShowAimButton();
+
+        StartCoroutine(aimingLifetime());
+
+    }
+
+    //AimDuration Right now does nothing, but there are many possibilities to add here (particles, sound etc.)
+    private IEnumerator aimingLifetime()
+    {
+        while (states.IsAiming)
+            yield return null;
+
+        AimEnd();
+
+    }
+
+    // For UI EventTrigger
     public void OnAimHold()
     {
         positioning.MoveAimToPointer();
     }
 
+    // For UI EventTrigger
     public void OnAimRelease()
     {
         positioning.onAimRelease();
         states.IsAiming = false;
     }
 
-    // AimStart
-    public void AimStart()
-    {
-        states.IsAiming = true;
-        positioning.ShowAimButton();
-
-        StartCoroutine(aimingLifetime());
-        
-    }
-
-    //AimDuration
-    private IEnumerator aimingLifetime()
-    { 
-        while(states.IsAiming)
-            yield return null;
-
-        AimEnd();
-
-    }
-    
-    //AimEnd + Callback
+    //AimEnd Right now does nothing, but there are many possibilities to add here (particles, sound etc.)
     private void AimEnd()
     {
     }

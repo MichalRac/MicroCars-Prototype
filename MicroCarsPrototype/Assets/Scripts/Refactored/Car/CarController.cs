@@ -14,6 +14,11 @@ public class CarController : MonoBehaviour
     private AimingRoot aiming;
     private CarStates states;
 
+    [SerializeField]
+    private GameObject car;
+    [SerializeField]
+    private GameObject ghostCar;
+
     OnAimFinishedCallback onAimFinishedCallback;
     OnMovementFinishedCallback onMovementFinishedCallback;
     OnTurnFinishedCallback onTurnFinishedCallbackReference;
@@ -26,6 +31,12 @@ public class CarController : MonoBehaviour
 
         onMovementFinishedCallback += OnMovementFinished;
         GetComponent<CarPhysicsRoot>().OnMovementFinishedCallbackReference = onMovementFinishedCallback;
+
+        car = Instantiate(car, transform) as GameObject;
+        ghostCar = Instantiate(ghostCar, transform) as GameObject;
+
+        GameObject[] objectsForAiming = { car, ghostCar };
+        GetComponent<AimingPositioning>().injectPlayerChildObjects(objectsForAiming);
     }
 
     public void StartCarTurn(OnTurnFinishedCallback onTurnFinishedCallback)
@@ -33,13 +44,11 @@ public class CarController : MonoBehaviour
         onTurnFinishedCallbackReference = onTurnFinishedCallback;
         states.IsTurn = true;
 
-        Debug.Log("AimingStarted");
-        aiming.AimStart();
+        aiming.AimTurnStart();
     }
 
     public void OnMovementFinished()
     {
-        Debug.Log("Movement Finished");
         FinishCarTurn();
     }
 
@@ -47,5 +56,4 @@ public class CarController : MonoBehaviour
     {
         onTurnFinishedCallbackReference();
     }
-
 }

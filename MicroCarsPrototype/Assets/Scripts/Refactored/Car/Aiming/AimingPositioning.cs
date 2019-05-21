@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
+/// <summary>
+///  This class is responsible for most operation with moving and calculating for the Aiming System
+///  TODO Refactor this class for easier readability and clarity.
+/// </summary>
 public class AimingPositioning : MonoBehaviour
 {
     private AimingRoot aimingRoot;
@@ -21,6 +24,12 @@ public class AimingPositioning : MonoBehaviour
     public Vector2 defaultButtonPosition = new Vector2(0.0f, 0.0f);
 
 
+    //Called from CarController on playerPrefab setup.
+    public void injectPlayerChildObjects(GameObject[] gameObjects)
+    {
+        car = gameObjects[0];
+        ghostCar = gameObjects[1];
+    }
 
     private void Start()
     {
@@ -29,17 +38,12 @@ public class AimingPositioning : MonoBehaviour
         aimCanvas = gameObject.transform.Find("AimCanvas").gameObject;
         aimButton = aimCanvas.transform.Find("AimButtonArea").gameObject;
 
-            // Instantiating necessary assets TODO move this to a different class
-        car = Instantiate(car, transform) as GameObject;
-        ghostCar = Instantiate(ghostCar, transform) as GameObject;
-        aimArrow = Instantiate(aimArrow, transform) as GameObject;
-
             // Setting unnecesary assets initial state as inactive
         ghostCar.SetActive(false);
         aimArrow.SetActive(false);
     }
 
-    // Calculating the power of the aim at the moment
+    // Calculating the power of the aim at the moment of method call
     public float CalculatePower()
     {
         float aimPower = Vector2.Distance(aimButton.transform.position, gameObject.transform.position);
@@ -50,14 +54,15 @@ public class AimingPositioning : MonoBehaviour
         return aimPower;
     }
 
+    //Reseting the aim assets positions after input ends
     public void ResetPosition()
     {
-        //Reseting the aim assets after input ends
         aimButton.transform.localPosition = defaultButtonPosition;
         aimArrow.transform.localPosition = -defaultButtonPosition;
         ghostCar.transform.localPosition = Vector2.zero;
     }
 
+    //Reseting the aim assets rotations after input ends
     public void ResetRotation()
     {
         Quaternion tagetRotation = ghostCar.transform.rotation;
@@ -66,8 +71,6 @@ public class AimingPositioning : MonoBehaviour
         ghostCar.transform.localRotation = reset;
         car.transform.localRotation = reset;
         gameObject.transform.rotation = tagetRotation;
-
-        //cameraController.fixCamera();     //Not working after refactoring, as camera rotation fixing is no longer needed.
     }
 
     public void MoveAimToPointer()
@@ -161,6 +164,11 @@ public class AimingPositioning : MonoBehaviour
 
             // Before finishing this coroutine we start another which will be waiting for the movement to stop.
         gameObject.GetComponent<CarPhysicsRoot>().StartCoroutine("StartNextTurnWhenStopped");
+    }
+
+    public Vector3 GetAimButtonPosition()
+    {
+        return aimButton.transform.position;
     }
     
 }

@@ -5,27 +5,47 @@ using UnityEngine;
 public class CameraController : MonoBehaviour {
 
     public GameObject target;
-    protected Transform cameraPoint;
-    protected Vector2 focusPoint;
-    private Quaternion nextRotation;
-    public float cameraRotationSpeed;
+    //public float maxDistanceX;
+    //public float maxDistanceY;
 
-	// Use this for initialization
-	void Start () {
+    private AimingPositioning aimButtonPositioning;
+    private Transform cameraPoint;
+    private Vector2 focusPoint;
+    private Rigidbody2D targetRB;
+    private Quaternion nextRotation;
+
+
+    public float cameraRotationSpeed;
+    public float cameraSpeed = 1.0f;
+
+	void Start ()
+    {
         cameraPoint = GetComponent<Transform>();
-        StartCoroutine(slowlyFixRotation());
-        
+        targetRB = target.GetComponent<Rigidbody2D>();     // It will be called in update so it should be better to use a reference rather that getting component each frame
+        aimButtonPositioning = target.GetComponent<AimingPositioning>();
     }
 	
-	// Update is called once per frame
-	void Update () {
-
+	void Update ()
+    {
         focusPoint = target.transform.position;
-        cameraPoint.position = new Vector3(focusPoint.x, focusPoint.y, -10.0f);
 
-        
+        /* // uncomment and add to optimalX and optimalY below for camera to also take aim button into consideration
+        Vector3 aimButtonPosition = aimButtonPositioning.GetAimButtonPosition();
+        Vector3 aimButtonDeltaPosition = new Vector3(
+            Mathf.Abs(focusPoint.x - aimButtonPosition.x),
+            Mathf.Abs(focusPoint.y - aimButtonPosition.y),
+            -10.0f);
+        */
+
+        float optimalX = focusPoint.x + targetRB.velocity.x;
+        float optimalY = focusPoint.y + targetRB.velocity.y;
+
+        Vector3 cameraOptimalPoint = new Vector3(optimalX, optimalY, -10.0f);
+        cameraPoint.position = Vector3.MoveTowards(cameraPoint.position, cameraOptimalPoint, cameraSpeed);
 	}
 
+    /*
+     * Depricated functionality for camera turning with player's rotation (always matching player's rotation)
     public void fixCamera()
     {
         StartCoroutine(slowlyFixRotation());
@@ -41,4 +61,5 @@ public class CameraController : MonoBehaviour {
         }
         
     }
+    */
 }
