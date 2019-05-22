@@ -56,9 +56,9 @@ public class CarPhysicsRoot : MonoBehaviour
         carMovement.Move(moveForce);
     }
 
-    public void InitializeSwipe(string direction, float lenght)
+    public void InitializeSwipe(string direction, float lenght, Vector3 swipeVector)
     {
-        carTurning.SwipeAction(direction, lenght);
+        carTurning.SwipeAction(direction, lenght, swipeVector);
     }
 
     public IEnumerator StartNextTurnWhenStopped()

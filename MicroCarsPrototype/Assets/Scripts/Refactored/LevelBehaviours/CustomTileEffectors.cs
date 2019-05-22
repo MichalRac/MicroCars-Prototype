@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class CustomTileEffectors : MonoBehaviour
 {
-    /*
+    
     public GameObject player;
-    private CarPhysics carPhysics;
+    private CarPhysicsRoot carPhysicsRoot;
+    private CarPhysicsTurning carTurning;
     private GameObject effector;
 
     public float accelaratePower;
@@ -18,14 +19,15 @@ public class CustomTileEffectors : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        carPhysics = player.GetComponent<CarPhysics>();
+        carTurning = player.GetComponent<CarPhysicsTurning>();
+        carPhysicsRoot = player.GetComponent<CarPhysicsRoot>();
     }
 
     
     private void OnTriggerStay2D(Collider2D collision)
     {
         Debug.Log("TileEffector TriggerEnter");
-        CarPhysics carPhysicsScript = collision.GetComponent<CarPhysics>();
+        CarPhysicsRoot carPhysicsScript = collision.GetComponent<CarPhysicsRoot>();
         if (carPhysicsScript == null)
         {
             Debug.Log("CarPhysics not found");
@@ -33,16 +35,15 @@ public class CustomTileEffectors : MonoBehaviour
         }
         else
         {
-            carPhysicsScript.triggerCustomTurnEffect(turnTime, effectorAngle);
-            carPhysicsScript.Move(accelaratePower);
+            carTurning.TurnOnCustomTurnEffect(turnTime, effectorAngle);
+            carPhysicsRoot.InitializeMovement(accelaratePower);
         }
     }
 
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        carPhysics.StopCoroutine("customTurnEffect");
+        carTurning.TurnOffCustomTurnEffect();
     }
 
-    */
 }

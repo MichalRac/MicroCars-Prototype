@@ -22,12 +22,13 @@ public class CarPhysicsTurning : MonoBehaviour
     }
 
 
-    public void SwipeAction(string direction, float swipeLenght)
+    public void SwipeAction(string direction, float swipeLenght, Vector3 swipeVector)
     {
         Debug.Log(states.IsMoving);
         if (states.IsMoving == false)
             return;
 
+        
         if (direction == "left")
         {
             rb2D.AddTorque(turnPower /* * (swipeLenght * turnSwipeResponsivness) */);
@@ -40,11 +41,32 @@ public class CarPhysicsTurning : MonoBehaviour
             StartCoroutine(movement.MaintainVelocityRotation());
         }
 
+        else if (direction == "any")
+        {
+            
+            if(Vector2.SignedAngle(swipeVector.normalized, rb2D.velocity.normalized) > 0)
+            {
+                rb2D.AddTorque(turnPower * (swipeLenght * turnSwipeResponsivness));
+                StartCoroutine(movement.MaintainVelocityRotation());
+            }
+
+            else if(Vector2.SignedAngle(swipeVector.normalized, rb2D.velocity.normalized) < 0)
+            {
+                rb2D.AddTorque(-turnPower * (swipeLenght * turnSwipeResponsivness));
+                StartCoroutine(movement.MaintainVelocityRotation());
+            }
+
+        }
     }
 
-    public void TriggerCustomTurnEffect(float turnDurationSec, float targetAngle)
+    public void TurnOnCustomTurnEffect(float turnDurationSec, float targetAngle)
     {
         StartCoroutine(CustomTurnEffect(turnDurationSec, targetAngle));
+    }
+
+    public void TurnOffCustomTurnEffect()
+    {
+        this.StopAllCoroutines();
     }
 
     public IEnumerator CustomTurnEffect(float turnDurationSec, float targetAngle)

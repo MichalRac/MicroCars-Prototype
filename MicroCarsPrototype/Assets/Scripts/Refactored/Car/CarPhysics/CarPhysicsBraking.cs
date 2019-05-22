@@ -6,6 +6,12 @@ public class CarPhysicsBraking : CarPhysicsRoot
 {
     [SerializeField]
     private float breaksPower = 3.0f;
+    private CarStates carStates;
+
+    private void Start()
+    {
+        carStates = GetComponent<CarStates>();
+    }
 
     public void breaksOn()
     {

@@ -12,6 +12,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: car1_ghost Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 374024956759447148, guid: 2f4214332d0b76a4897afc15f0ad64e9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8420982135293704634, guid: 2f4214332d0b76a4897afc15f0ad64e9,
         type: 3}
       propertyPath: m_LocalPosition.x

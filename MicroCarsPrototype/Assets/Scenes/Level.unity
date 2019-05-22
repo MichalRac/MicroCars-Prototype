@@ -240,7 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98498814169e7234da5ccbaeb66efb7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  carPhysics: {fileID: 762474471}
+  activePlayer: {fileID: 762474463}
 --- !u!114 &346986079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -351,18 +351,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2000268509}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &762474471 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1996463733407601197, guid: 3dfbe4d5aa49d624ebed1c76849973ff,
-    type: 3}
-  m_PrefabInstance: {fileID: 2000268509}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 762474463}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0bf2c852cd7fa74398f0295e5f175e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1609914678
 GameObject:
   m_ObjectHideFlags: 0
@@ -544,7 +532,12 @@ PrefabInstance:
     - target: {fileID: 2159401398751520167, guid: 3dfbe4d5aa49d624ebed1c76849973ff,
         type: 3}
       propertyPath: turnPower
-      value: 30
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2159401398751520167, guid: 3dfbe4d5aa49d624ebed1c76849973ff,
+        type: 3}
+      propertyPath: turnSwipeResponsivness
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7966012228368648591, guid: 3dfbe4d5aa49d624ebed1c76849973ff,
         type: 3}
