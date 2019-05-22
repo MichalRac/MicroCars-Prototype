@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 8469233382158775316}
   - component: {fileID: 2491660025887112530}
   - component: {fileID: 3109431433610702478}
+  - component: {fileID: 1555303561980138654}
   m_Layer: 0
   m_Name: Player 1
   m_TagString: Untagged
@@ -53,6 +54,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3612f5da7e23f1429078d01098a3aff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  car: {fileID: 374024956759447148, guid: 2f4214332d0b76a4897afc15f0ad64e9, type: 3}
+  ghostCar: {fileID: 5299753548000142913, guid: 860751bc9978a18408a63416597df0c9,
+    type: 3}
 --- !u!114 &6538959226391840230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89,8 +93,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bf8483587b109e46b839a958ebcef9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  carSpeed: 1
-  carMaxVelocity: 7.5
+  carSpeed: 75
+  carMaxVelocityMagnitude: 7.5
 --- !u!114 &5164372255071004561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105,7 +109,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deltaDragPower: 0.5
   deltaDragTime: 0.5
-  firstSlowTimeDelay: 0.5
+  firstSlowTimeDelay: 4
   surfaceDragModifiers: 1
 --- !u!114 &2159401398751520167
 MonoBehaviour:
@@ -119,8 +123,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aab5f2141075abe40a436749bcdae4b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turnPower: 5
-  turnSwipeResponsivness: 1
+  turnPower: 0.25
+  turnSwipeResponsivness: 20
 --- !u!114 &1146513794170494267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,6 +190,32 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!61 &1555303561980138654
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4012538024353942121}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.65, y: 1.15}
+  m_EdgeRadius: 0
 --- !u!1001 &4927054877857564293
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -193,6 +223,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2461356380534586936}
     m_Modifications:
+    - target: {fileID: 679268706212177474, guid: f732aa2d61e396c44857b6ac7081d180,
+        type: 3}
+      propertyPath: m_Name
+      value: AimCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8904243575646589003, guid: f732aa2d61e396c44857b6ac7081d180,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2398007661210782989, guid: f732aa2d61e396c44857b6ac7081d180,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -261,12 +301,12 @@ PrefabInstance:
     - target: {fileID: 2398007661210782989, guid: f732aa2d61e396c44857b6ac7081d180,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1127
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 2398007661210782989, guid: f732aa2d61e396c44857b6ac7081d180,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 636
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 2398007661210782989, guid: f732aa2d61e396c44857b6ac7081d180,
         type: 3}
@@ -298,15 +338,20 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 679268706212177474, guid: f732aa2d61e396c44857b6ac7081d180,
+    - target: {fileID: 8948208190069669062, guid: f732aa2d61e396c44857b6ac7081d180,
         type: 3}
-      propertyPath: m_Name
-      value: AimCanvas
+      propertyPath: m_Color.a
+      value: 0.1254902
       objectReference: {fileID: 0}
-    - target: {fileID: 8904243575646589003, guid: f732aa2d61e396c44857b6ac7081d180,
+    - target: {fileID: 373373576261884345, guid: f732aa2d61e396c44857b6ac7081d180,
         type: 3}
-      propertyPath: m_IsActive
-      value: 0
+      propertyPath: m_SizeDelta.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 373373576261884345, guid: f732aa2d61e396c44857b6ac7081d180,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 1929435302634664724, guid: f732aa2d61e396c44857b6ac7081d180,
         type: 3}
@@ -318,6 +363,11 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 8469233382158775316}
+    - target: {fileID: 6905622196318940546, guid: f732aa2d61e396c44857b6ac7081d180,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f732aa2d61e396c44857b6ac7081d180, type: 3}
 --- !u!224 &7288800078413433736 stripped
