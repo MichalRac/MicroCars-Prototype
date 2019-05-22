@@ -341,6 +341,26 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1402403427178650688, guid: 4a2f2d0206ee9db4f9fd64666468962e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4.34
+      objectReference: {fileID: 0}
+    - target: {fileID: 5763132902284512346, guid: 4a2f2d0206ee9db4f9fd64666468962e,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 762474463}
+    - target: {fileID: 5763132902284512346, guid: 4a2f2d0206ee9db4f9fd64666468962e,
+        type: 3}
+      propertyPath: accelaratePower
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5763132902284512346, guid: 4a2f2d0206ee9db4f9fd64666468962e,
+        type: 3}
+      propertyPath: turnTime
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6096712865760106071, guid: 4a2f2d0206ee9db4f9fd64666468962e, type: 3}
     - {fileID: 6096712866188024604, guid: 4a2f2d0206ee9db4f9fd64666468962e, type: 3}
@@ -484,72 +504,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7288800078413433736, guid: 3dfbe4d5aa49d624ebed1c76849973ff,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 7288800078413433736, guid: 3dfbe4d5aa49d624ebed1c76849973ff,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 1650458484879803548, guid: 3dfbe4d5aa49d624ebed1c76849973ff,
-        type: 3}
-      propertyPath: carSpeed
-      value: 75
-      objectReference: {fileID: 0}
-    - target: {fileID: 1650458484879803548, guid: 3dfbe4d5aa49d624ebed1c76849973ff,
-        type: 3}
-      propertyPath: carMaxVelocity
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1996740063927134983, guid: 3dfbe4d5aa49d624ebed1c76849973ff,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5164372255071004561, guid: 3dfbe4d5aa49d624ebed1c76849973ff,
-        type: 3}
-      propertyPath: firstSlowTimeDelay
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4705723969046912828, guid: 3dfbe4d5aa49d624ebed1c76849973ff,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 4705723969046912828, guid: 3dfbe4d5aa49d624ebed1c76849973ff,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 4057182234004273731, guid: 3dfbe4d5aa49d624ebed1c76849973ff,
-        type: 3}
-      propertyPath: m_Color.a
-      value: 0.1254902
-      objectReference: {fileID: 0}
-    - target: {fileID: 2159401398751520167, guid: 3dfbe4d5aa49d624ebed1c76849973ff,
-        type: 3}
-      propertyPath: turnPower
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2159401398751520167, guid: 3dfbe4d5aa49d624ebed1c76849973ff,
-        type: 3}
-      propertyPath: turnSwipeResponsivness
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 7966012228368648591, guid: 3dfbe4d5aa49d624ebed1c76849973ff,
-        type: 3}
-      propertyPath: car
-      value: 
-      objectReference: {fileID: 374024956759447148, guid: 2f4214332d0b76a4897afc15f0ad64e9,
-        type: 3}
-    - target: {fileID: 7966012228368648591, guid: 3dfbe4d5aa49d624ebed1c76849973ff,
-        type: 3}
-      propertyPath: ghostCar
-      value: 
-      objectReference: {fileID: 5299753548000142913, guid: 860751bc9978a18408a63416597df0c9,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3dfbe4d5aa49d624ebed1c76849973ff, type: 3}
