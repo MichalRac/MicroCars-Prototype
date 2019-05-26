@@ -14,11 +14,14 @@ public class CarPhysicsTurning : MonoBehaviour
     private Rigidbody2D rb2D;
 
 
-    private void Start()
+    private void Awake()
     {
         states = GetComponent<CarStates>();
         movement = GetComponent<CarPhysicsMovement>();
         rb2D = GetComponent<Rigidbody2D>();
+        Debug.Assert(states, $"{typeof(CarStates)} is null");
+        Debug.Assert(movement, $"{typeof(CarPhysicsMovement)} is null");
+        Debug.Assert(rb2D, $"{typeof(Rigidbody2D)} is null");
     }
 
 
@@ -34,13 +37,11 @@ public class CarPhysicsTurning : MonoBehaviour
             rb2D.AddTorque(turnPower /* * (swipeLenght * turnSwipeResponsivness) */);
             StartCoroutine(movement.MaintainVelocityRotation());
         }
-
         else if (direction == "right")
         {
             rb2D.AddTorque(-turnPower /* * (swipeLenght * turnSwipeResponsivness) */);
             StartCoroutine(movement.MaintainVelocityRotation());
         }
-
         else if (direction == "any")
         {
             
@@ -55,7 +56,10 @@ public class CarPhysicsTurning : MonoBehaviour
                 rb2D.AddTorque(-turnPower * (swipeLenght * turnSwipeResponsivness));
                 StartCoroutine(movement.MaintainVelocityRotation());
             }
-
+        }
+        else
+        {
+            Debug.Log($"Unknown direction passed: {direction}");
         }
     }
 
@@ -74,13 +78,9 @@ public class CarPhysicsTurning : MonoBehaviour
         Quaternion targetRotation = Quaternion.Euler(0.0f, 0.0f, targetAngle);
         float angleDifference = Quaternion.Angle(gameObject.transform.rotation, targetRotation);
 
-        float timeElapsed = 0.0f;
 
         while (Quaternion.Angle(gameObject.transform.rotation, targetRotation) > 0.001f)
         {
-
-            Debug.Log(timeElapsed);
-            timeElapsed += Time.fixedDeltaTime;
 
             float deltaAngle = angleDifference * (Time.fixedDeltaTime / turnDurationSec);
             gameObject.transform.rotation = Quaternion.RotateTowards(gameObject.transform.rotation, targetRotation, deltaAngle);

@@ -20,25 +20,22 @@ public class CarPhysicsRoot : MonoBehaviour
     protected Rigidbody2D rb2D;
     private CarStates states;
 
-    private float defaultAngularDrag;
+    private float defaultAngularDrag;   // Drag we have on Awake
 
     OnMovementFinishedCallback onMovementFinishedCallbackReference;
-
     public OnMovementFinishedCallback OnMovementFinishedCallbackReference
     {
         get
         {
             return onMovementFinishedCallbackReference;
         }
-
         set
         {
             onMovementFinishedCallbackReference = value;
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         carMovement = GetComponent<CarPhysicsMovement>();
         carDynamicDrag = GetComponent<CarPhysicsDynamicDrag>();
@@ -46,6 +43,12 @@ public class CarPhysicsRoot : MonoBehaviour
         carBraking = GetComponent<CarPhysicsBraking>();
         rb2D = GetComponent<Rigidbody2D>();
         states = GetComponent<CarStates>();
+        Debug.Assert(carMovement, $"{typeof(CarPhysicsMovement)} is null");
+        Debug.Assert(carDynamicDrag, $"{typeof(CarPhysicsDynamicDrag)} is null");
+        Debug.Assert(carTurning, $"{typeof(CarPhysicsTurning)} is null");
+        Debug.Assert(carBraking, $"{typeof(CarPhysicsBraking)} is null");
+        Debug.Assert(rb2D, $"{typeof(Rigidbody2D)} is null");
+        Debug.Assert(states, $"{typeof(CarStates)} is null");
 
         defaultAngularDrag = rb2D.angularDrag;
     }

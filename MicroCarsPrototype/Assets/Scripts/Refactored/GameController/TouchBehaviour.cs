@@ -13,15 +13,16 @@ namespace DigitalRubyShared
         private LongPressGestureRecognizer longPressGesture;
         //private readonly List<Vector3> swipeLines = new List<Vector3>();
 
-        // Use this for initialization
-        void Start()
+        private void Awake()
         {
             carPhysics = activePlayer.GetComponent<CarPhysicsRoot>();
             carBraking = activePlayer.GetComponent<CarPhysicsBraking>();
+            Debug.Assert(carPhysics, $"{typeof(CarPhysicsRoot)} is null");
+            Debug.Assert(carBraking, $"{typeof(CarPhysicsBraking)} is null");
+        }
 
-            //CreateSwipeLeftGesture();
-            //CreateSwipeRightGesture();
-
+        void Start()
+        {
             // Swipes in any direction activated
             CreateSwipeAnyGesture();
             CreateLongPressGesture();

@@ -23,14 +23,20 @@ public class CarController : MonoBehaviour
     OnMovementFinishedCallback onMovementFinishedCallback;
     OnTurnFinishedCallback onTurnFinishedCallbackReference;
 
-    void Start()
+    private void Awake()
     {
         carPhysics = GetComponent<CarPhysicsRoot>();
         aiming = GetComponent<AimingRoot>();
         states = GetComponent<CarStates>();
+        Debug.Assert(carPhysics, $"{typeof(CarPhysicsRoot)} is null");
+        Debug.Assert(aiming, $"{typeof(AimingRoot)} is null");
+        Debug.Assert(states, $"{typeof(CarStates)} is null");
+    }
 
+    void Start()
+    {
         onMovementFinishedCallback += OnMovementFinished;
-        GetComponent<CarPhysicsRoot>().OnMovementFinishedCallbackReference = onMovementFinishedCallback;
+        carPhysics.OnMovementFinishedCallbackReference = onMovementFinishedCallback;
 
         car = Instantiate(car, transform) as GameObject;
         ghostCar = Instantiate(ghostCar, transform) as GameObject;

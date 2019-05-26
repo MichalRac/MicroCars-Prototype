@@ -9,10 +9,12 @@ public class CarPhysicsBraking : MonoBehaviour
     private CarStates carStates;
     private Rigidbody2D rb2D;
 
-    private void Start()
+    private void Awake()
     {
         rb2D = GetComponent<Rigidbody2D>();
         carStates = GetComponent<CarStates>();
+        Debug.Assert(rb2D, $"{typeof(Rigidbody2D)} is null");
+        Debug.Assert(carStates, $"{typeof(CarStates)} is null");
     }
 
     public void breaksOn()
