@@ -8,11 +8,11 @@ public class CameraController : MonoBehaviour {
     //public float maxDistanceX;
     //public float maxDistanceY;
 
-    private AimingPositioning aimButtonPositioning;
-    private Transform cameraPoint;
-    private Vector2 focusPoint;
-    private Rigidbody2D targetRB;
-    private Quaternion nextRotation;
+    private AimingPositioning _aimButtonPositioning;
+    private Transform _cameraPoint;
+    private Vector2 _focusPoint;
+    private Rigidbody2D _targetRB;
+    private Quaternion _nextRotation;
 
 
     public float cameraRotationSpeed;
@@ -20,14 +20,14 @@ public class CameraController : MonoBehaviour {
 
 	void Start ()
     {
-        cameraPoint = GetComponent<Transform>();
-        targetRB = target.GetComponent<Rigidbody2D>();     // It will be called in update so it should be better to use a reference rather that getting component each frame
-        aimButtonPositioning = target.GetComponent<AimingPositioning>();
+        _cameraPoint = GetComponent<Transform>();
+        _targetRB = target.GetComponent<Rigidbody2D>();     // It will be called in update so it should be better to use a reference rather that getting component each frame
+        _aimButtonPositioning = target.GetComponent<AimingPositioning>();
     }
 	
 	void Update ()
     {
-        focusPoint = target.transform.position;
+        _focusPoint = target.transform.position;
 
         /* // uncomment and add to optimalX and optimalY below for camera to also take aim button into consideration
         Vector3 aimButtonPosition = aimButtonPositioning.GetAimButtonPosition();
@@ -37,11 +37,11 @@ public class CameraController : MonoBehaviour {
             -10.0f);
         */
 
-        float optimalX = focusPoint.x + targetRB.velocity.x;
-        float optimalY = focusPoint.y + targetRB.velocity.y;
+        float optimalX = _focusPoint.x + _targetRB.velocity.x;
+        float optimalY = _focusPoint.y + _targetRB.velocity.y;
 
         Vector3 cameraOptimalPoint = new Vector3(optimalX, optimalY, -10.0f);
-        cameraPoint.position = Vector3.MoveTowards(cameraPoint.position, cameraOptimalPoint, cameraSpeed);
+        _cameraPoint.position = Vector3.MoveTowards(_cameraPoint.position, cameraOptimalPoint, cameraSpeed);
 	}
 
     /*

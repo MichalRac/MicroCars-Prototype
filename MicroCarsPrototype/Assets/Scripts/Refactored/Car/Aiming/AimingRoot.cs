@@ -7,21 +7,21 @@ public class AimingRoot : MonoBehaviour
 {
     
     [HideInInspector]
-    private AimingPositioning positioning;
-    private CarStates states;
+    private AimingPositioning _positioning;
+    private CarStates _states;
 
     OnAimFinishedCallback onAimFinishedCallbackReference;
 
     private void Start()
     {
-        positioning = GetComponent<AimingPositioning>();
-        states = GetComponent<CarStates>();
+        _positioning = GetComponent<AimingPositioning>();
+        _states = GetComponent<CarStates>();
     }
 
     public void AimTurnStart()
     {
-        states.IsAiming = true;
-        positioning.ShowAimButton();
+        _states.IsAiming = true;
+        _positioning.ShowAimButton();
 
         StartCoroutine(aimingLifetime());
 
@@ -30,7 +30,7 @@ public class AimingRoot : MonoBehaviour
     //AimDuration Right now does nothing, but there are many possibilities to add here (particles, sound etc.)
     private IEnumerator aimingLifetime()
     {
-        while (states.IsAiming)
+        while (_states.IsAiming)
             yield return null;
 
         AimEnd();
@@ -40,14 +40,14 @@ public class AimingRoot : MonoBehaviour
     // For UI EventTrigger
     public void OnAimHold()
     {
-        positioning.MoveAimToPointer();
+        _positioning.MoveAimToPointer();
     }
 
     // For UI EventTrigger
     public void OnAimRelease()
     {
-        positioning.onAimRelease();
-        states.IsAiming = false;
+        _positioning.onAimRelease();
+        _states.IsAiming = false;
     }
 
     //AimEnd Right now does nothing, but there are many possibilities to add here (particles, sound etc.)

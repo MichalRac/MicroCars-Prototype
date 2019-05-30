@@ -162,12 +162,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3630322cef128794ca9309f96037291c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  car: {fileID: 374024956759447148, guid: 2f4214332d0b76a4897afc15f0ad64e9, type: 3}
-  ghostCar: {fileID: 5299753548000142913, guid: 860751bc9978a18408a63416597df0c9,
+  _car: {fileID: 4012538024353942121}
+  _aimArrow: {fileID: 2985132005865369819, guid: b2bf5cddfa20a8a41acea98618ecf6d1,
     type: 3}
-  aimArrow: {fileID: 2985132005865369819, guid: b2bf5cddfa20a8a41acea98618ecf6d1,
-    type: 3}
-  aimButton: {fileID: 4607833417469810382}
   defaultButtonPosition: {x: 0, y: 0}
 --- !u!50 &3109431433610702478
 Rigidbody2D:
@@ -373,12 +370,6 @@ PrefabInstance:
 --- !u!224 &7288800078413433736 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2398007661210782989, guid: f732aa2d61e396c44857b6ac7081d180,
-    type: 3}
-  m_PrefabInstance: {fileID: 4927054877857564293}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &4607833417469810382 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8904243575646589003, guid: f732aa2d61e396c44857b6ac7081d180,
     type: 3}
   m_PrefabInstance: {fileID: 4927054877857564293}
   m_PrefabAsset: {fileID: 0}

@@ -10,30 +10,24 @@ using UnityEngine;
 [RequireComponent(typeof(AimingRoot))]
 public class CarPhysicsRoot : MonoBehaviour
 {
-    protected const float minMovingSpeed = 0.001f;
-    protected const float movingSpeedSlowDownValue = minMovingSpeed * 1000;
-
-    protected CarPhysicsMovement carMovement;
-    protected CarPhysicsDynamicDrag carDynamicDrag;
-    protected CarPhysicsTurning carTurning;
-    protected CarPhysicsBraking carBraking;
-    protected Rigidbody2D rb2D;
-    private CarStates states;
-
+    private const float _minMovingSpeed = 0.001f;
+    private const float _movingSpeedSlowDownValue = _minMovingSpeed * 1000;
     private float defaultAngularDrag;   // Drag we have on Awake
 
+    public static float MinMovingSpeed => _minMovingSpeed;
+    public static float MovingSpeedSlowDownValue => _movingSpeedSlowDownValue;
+
+    private CarPhysicsMovement carMovement;
+    private CarPhysicsDynamicDrag carDynamicDrag;
+    private CarPhysicsTurning carTurning;
+    private CarPhysicsBraking carBraking;
+    private Rigidbody2D rb2D;
+    private CarStates states;
+
     OnMovementFinishedCallback onMovementFinishedCallbackReference;
-    public OnMovementFinishedCallback OnMovementFinishedCallbackReference
-    {
-        get
-        {
-            return onMovementFinishedCallbackReference;
-        }
-        set
-        {
-            onMovementFinishedCallbackReference = value;
-        }
-    }
+    public OnMovementFinishedCallback OnMovementFinishedCallbackReference { get => onMovementFinishedCallbackReference; set => onMovementFinishedCallbackReference = value; }
+
+
 
     private void Awake()
     {
@@ -50,6 +44,10 @@ public class CarPhysicsRoot : MonoBehaviour
         Debug.Assert(rb2D, $"{typeof(Rigidbody2D)} is null");
         Debug.Assert(states, $"{typeof(CarStates)} is null");
 
+        carMovement.MinMovingSpeed = _minMovingSpeed;
+        carDynamicDrag.MovingSpeedSlowDownValue = MovingSpeedSlowDownValue;
+        carDynamicDrag.MinMovingSpeed = MinMovingSpeed;
+        carDynamicDrag.rb2D = rb2D;
         defaultAngularDrag = rb2D.angularDrag;
     }
 
@@ -69,7 +67,7 @@ public class CarPhysicsRoot : MonoBehaviour
         Debug.Log("StartNextTurnWhenStopped initialized");
         yield return new WaitForSeconds(1);      // Because coroutine ended up being called before any actual movement was applied resulting in bugs
 
-        while (rb2D.velocity.magnitude >= minMovingSpeed)
+        while (rb2D.velocity.magnitude >= _minMovingSpeed)
         {
             yield return new WaitForFixedUpdate();
         }
@@ -81,16 +79,9 @@ public class CarPhysicsRoot : MonoBehaviour
 
 
         states.IsMoving = false;
-        onMovementFinishedCallbackReference();
+        OnMovementFinishedCallbackReference();
         //gameController.switchTurnState(false);
         //gameController.StartAimingTurn();
 
     }
-    /*
-    private void Update()
-    {
-        Debug.Log(stateIsMoving);
-    }
-    */
-
 }

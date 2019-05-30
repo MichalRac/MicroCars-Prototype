@@ -6,9 +6,9 @@ public class CustomTileEffectors : MonoBehaviour
 {
     
     public GameObject player;
-    private CarPhysicsRoot carPhysicsRoot;
-    private CarPhysicsTurning carTurning;
-    private GameObject effector;
+    private CarPhysicsRoot _carPhysicsRoot;
+    private CarPhysicsTurning _carTurning;
+    private GameObject _effector;
 
     public float accelaratePower;
     public float turnTime;
@@ -19,8 +19,8 @@ public class CustomTileEffectors : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        carTurning = player.GetComponent<CarPhysicsTurning>();
-        carPhysicsRoot = player.GetComponent<CarPhysicsRoot>();
+        _carTurning = player.GetComponent<CarPhysicsTurning>();
+        _carPhysicsRoot = player.GetComponent<CarPhysicsRoot>();
     }
 
     
@@ -35,15 +35,15 @@ public class CustomTileEffectors : MonoBehaviour
         }
         else
         {
-            carTurning.TurnOnCustomTurnEffect(turnTime, effectorAngle);
-            carPhysicsRoot.InitializeMovement(accelaratePower);
+            _carTurning.TurnOnCustomTurnEffect(turnTime, effectorAngle);
+            _carPhysicsRoot.InitializeMovement(accelaratePower);
         }
     }
 
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        carTurning.TurnOffCustomTurnEffect();
+        _carTurning.TurnOffCustomTurnEffect();
     }
 
 }

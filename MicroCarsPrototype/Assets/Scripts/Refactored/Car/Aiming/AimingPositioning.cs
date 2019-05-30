@@ -10,43 +10,41 @@ public class AimingPositioning : MonoBehaviour
 {
     private AimingRoot aimingRoot;
 
-    private GameObject player;
-    [SerializeField]
-    private GameObject car;
-    [SerializeField]
-    private GameObject ghostCar;
-    [SerializeField]
-    private GameObject aimArrow;
-    [SerializeField]
-    private GameObject aimButton;
+    private GameObject _player;
+    private GameObject _ghostCar;
+    private GameObject _aimButton;
+    [SerializeField] private GameObject _car;
+    [SerializeField] private GameObject _aimArrow;
 
-    private GameObject aimCanvas;
+    private GameObject _aimCanvas;
     public Vector2 defaultButtonPosition = new Vector2(0.0f, 0.0f);
 
 
-    //Called from CarController on playerPrefab setup.
-    public void injectPlayerChildObjects(GameObject[] gameObjects)
+
+
+    private void Awake()
     {
-        car = gameObjects[0];
-        ghostCar = gameObjects[1];
+        // Getting needed references
+        _player = this.gameObject;
+        _aimCanvas = gameObject.transform.Find("AimCanvas").gameObject;
+        _aimButton = _aimCanvas.transform.Find("AimButtonArea").gameObject;
     }
 
-    private void Start()
+    //Called on Start() from CarController on playerPrefab setup.
+    public void injectPlayerChildObjects(GameObject[] gameObjects)
     {
-            // Getting needed references
-        player = GetComponent<GameObject>();
-        aimCanvas = gameObject.transform.Find("AimCanvas").gameObject;
-        aimButton = aimCanvas.transform.Find("AimButtonArea").gameObject;
-
-            // Setting unnecesary assets initial state as inactive
-        ghostCar.SetActive(false);
-        aimArrow.SetActive(false);
+        _car = gameObjects[0];
+        _ghostCar = gameObjects[1];
+        
+        // Disabling since they are not yet required on start
+        _ghostCar.SetActive(false);
+        _aimArrow.SetActive(false);
     }
 
     // Calculating the power of the aim at the moment of method call
     public float CalculatePower()
     {
-        float aimPower = Vector2.Distance(aimButton.transform.position, gameObject.transform.position);
+        float aimPower = Vector2.Distance(_aimButton.transform.position, gameObject.transform.position);
 
         if (aimPower < 1.0f)
             return 0;
@@ -57,26 +55,26 @@ public class AimingPositioning : MonoBehaviour
     //Reseting the aim assets positions after input ends
     public void ResetPosition()
     {
-        aimButton.transform.localPosition = defaultButtonPosition;
-        aimArrow.transform.localPosition = -defaultButtonPosition;
-        ghostCar.transform.localPosition = Vector2.zero;
+        _aimButton.transform.localPosition = defaultButtonPosition;
+        _aimArrow.transform.localPosition = -defaultButtonPosition;
+        _ghostCar.transform.localPosition = Vector2.zero;
     }
 
     //Reseting the aim assets rotations after input ends
     public void ResetRotation()
     {
-        Quaternion tagetRotation = ghostCar.transform.rotation;
+        Quaternion tagetRotation = _ghostCar.transform.rotation;
         Quaternion reset = new Quaternion(0.0f, 0.0f, 0.0f, 0.0f);
 
-        ghostCar.transform.localRotation = reset;
-        car.transform.localRotation = reset;
+        _ghostCar.transform.localRotation = reset;
+        _car.transform.localRotation = reset;
         gameObject.transform.rotation = tagetRotation;
     }
 
     public void MoveAimToPointer()
     {
         Vector2 touchPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        aimButton.transform.position = touchPoint;
+        _aimButton.transform.position = touchPoint;
         MoveDirectionArrow();
     }
 
@@ -118,13 +116,13 @@ public class AimingPositioning : MonoBehaviour
     public void DisplayAimAssets(bool setDisplay)
     {
 
-        aimArrow.transform.gameObject.SetActive(setDisplay);
-        ghostCar.gameObject.SetActive(setDisplay);
+        _aimArrow.transform.gameObject.SetActive(setDisplay);
+        _ghostCar.gameObject.SetActive(setDisplay);
     }
 
     public void ShowAimButton()
     {
-        aimButton.gameObject.SetActive(true);
+        _aimButton.gameObject.SetActive(true);
     }
 
     public void MoveDirectionArrow()
@@ -137,20 +135,20 @@ public class AimingPositioning : MonoBehaviour
 
 
             //Setting the aim direction arrow to the opposite of aim button
-        aimArrow.transform.localPosition = -aimButton.transform.localPosition;
+        _aimArrow.transform.localPosition = -_aimButton.transform.localPosition;
 
             // Calculating rotation towards which we aim
-        Vector2 direction = aimButton.transform.localPosition - car.transform.localPosition;
+        Vector2 direction = _aimButton.transform.localPosition - _car.transform.localPosition;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 90;
         Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
             //Setting up the rotation for the aim button, car, and ghost car
-        aimArrow.transform.localRotation = rotation;
-        car.transform.localRotation = rotation;
-        ghostCar.transform.localRotation = rotation;
+        _aimArrow.transform.localRotation = rotation;
+        _car.transform.localRotation = rotation;
+        _ghostCar.transform.localRotation = rotation;
             //TODO: find if there is a more efficient way to set up ghost car position
-        ghostCar.transform.localPosition = aimButton.transform.localPosition;
-        ghostCar.transform.position = Vector2.MoveTowards(ghostCar.transform.position, gameObject.transform.position, 0.5f);
+        _ghostCar.transform.localPosition = _aimButton.transform.localPosition;
+        _ghostCar.transform.position = Vector2.MoveTowards(_ghostCar.transform.position, gameObject.transform.position, 0.5f);
 
             //aimPowerValueText.text = calculatePower().ToString();         // For displaying the power of currenty aimed button.
     }
@@ -160,7 +158,7 @@ public class AimingPositioning : MonoBehaviour
         yield return null;
         gameObject.GetComponent<CarPhysicsRoot>().InitializeMovement(CalculatePower());
         ResetPosition();
-        aimButton.gameObject.SetActive(false);
+        _aimButton.gameObject.SetActive(false);
 
             // Before finishing this coroutine we start another which will be waiting for the movement to stop.
         gameObject.GetComponent<CarPhysicsRoot>().StartCoroutine("StartNextTurnWhenStopped");
@@ -168,7 +166,7 @@ public class AimingPositioning : MonoBehaviour
 
     public Vector3 GetAimButtonPosition()
     {
-        return aimButton.transform.position;
+        return _aimButton.transform.position;
     }
     
 }

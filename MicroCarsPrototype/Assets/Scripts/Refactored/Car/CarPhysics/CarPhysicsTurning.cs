@@ -50,7 +50,6 @@ public class CarPhysicsTurning : MonoBehaviour
                 rb2D.AddTorque(turnPower * (swipeLenght * turnSwipeResponsivness));
                 StartCoroutine(movement.MaintainVelocityRotation());
             }
-
             else if(Vector2.SignedAngle(swipeVector.normalized, rb2D.velocity.normalized) < 0)
             {
                 rb2D.AddTorque(-turnPower * (swipeLenght * turnSwipeResponsivness));
