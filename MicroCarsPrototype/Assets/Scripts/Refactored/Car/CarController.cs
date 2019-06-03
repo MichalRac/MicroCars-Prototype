@@ -56,6 +56,9 @@ public class CarController : MonoBehaviour
         public void StartCarTurn(OnTurnFinishedCallback onTurnFinishedCallback)
         {
             onTurnFinishedCallbackReference = onTurnFinishedCallback;
+            if (States.IsLevelFinished)
+                onTurnFinishedCallback();
+
             States.IsTurn = true;
 
             //Starting aiming turn sequence

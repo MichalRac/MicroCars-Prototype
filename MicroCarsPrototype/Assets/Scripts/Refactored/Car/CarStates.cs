@@ -4,12 +4,20 @@ using UnityEngine;
 
 public class CarStates : MonoBehaviour
 {
-    private bool _isLevelFinished;
-    private bool _isMoving;
-    private bool _isAiming;
-    private bool _isTurn;
-    private int _turnsDone;
+    private bool _isLevelFinished = false;
+    private bool _isMoving = false;
+    private bool _isAiming = false;
+    private bool _isTurn = false;
+    private bool _hitWall = false;
+    private int _turnsDone = 0;
 
+    private CarPhysicsMovement movement;
+
+    private void Awake()
+    {
+        movement = GetComponent<CarPhysicsMovement>();
+        Debug.Assert(movement, $"{typeof(CarPhysicsMovement)} is null");
+    }
 
     public bool IsLevelFinished {
         get => _isLevelFinished;
@@ -55,5 +63,26 @@ public class CarStates : MonoBehaviour
             if(!_isTurn)
                 Debug.Log("Turn finished");
         }
+    }
+
+    public bool HitWall
+    {
+        get => _hitWall;
+        set
+        {
+            _hitWall = value;
+            if (_hitWall == true)
+                StartCoroutine(TurnHitWallStateAfterNSeconds(2));
+        }
+    }
+
+    public IEnumerator TurnHitWallStateAfterNSeconds(int n)
+    {
+        movement.StopCoroutine("MaintainVelocityRotation");
+        yield return new WaitForSeconds(n);
+        HitWall = false;
+
+        if (IsMoving)
+            movement.StartCoroutine("MaintainVelocityRotation");
     }
 }

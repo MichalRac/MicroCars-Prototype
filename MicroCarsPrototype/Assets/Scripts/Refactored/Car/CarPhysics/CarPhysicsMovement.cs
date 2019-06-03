@@ -8,6 +8,7 @@ public class CarPhysicsMovement : MonoBehaviour
     [SerializeField] private float _carSpeed = 0.0f;
     [SerializeField] private float _carMaxVelocityMagnitude = 7.5f;
     private Rigidbody2D _rb2D;
+    private CarStates _states;
     private CarPhysicsDynamicDrag _carDynamicDrag;
 
     private float _minMovingSpeed; // Value passed from CarPhysicsRoot TODO: Think of a better solution to passing this one value
@@ -18,6 +19,10 @@ public class CarPhysicsMovement : MonoBehaviour
     {
         _rb2D = GetComponent<Rigidbody2D>();
         _carDynamicDrag = GetComponent<CarPhysicsDynamicDrag>();
+        _states = GetComponent<CarStates>();
+        Debug.Assert(_rb2D, $"{typeof(Rigidbody2D)} is null");
+        Debug.Assert(_carDynamicDrag, $"{typeof(CarPhysicsDynamicDrag)} is null");
+        Debug.Assert(_states, $"{typeof(CarStates)} is null");
     }
 
     public void Move(float moveForce)
@@ -27,7 +32,10 @@ public class CarPhysicsMovement : MonoBehaviour
 
         StartCoroutine(_carDynamicDrag.StartDynamicDrag());
 
-        StartCoroutine(MaintainVelocityRotation());
+        if(_states.HitWall == false)
+        {
+            StartCoroutine(MaintainVelocityRotation());
+        }
     }
 
     public IEnumerator MaintainVelocityRotation()

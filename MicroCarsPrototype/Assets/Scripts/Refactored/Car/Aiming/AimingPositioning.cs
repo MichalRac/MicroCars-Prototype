@@ -28,7 +28,10 @@ public class AimingPositioning : MonoBehaviour
             _player = this.gameObject;
             _aimCanvas = gameObject.transform.Find("AimCanvas").gameObject;
             _aimButton = _aimCanvas.transform.Find("AimButtonArea").gameObject;
-        }
+            Debug.Assert(_player, "player is null");
+            Debug.Assert(_aimCanvas, "aimCanvas is null");
+            Debug.Assert(_aimButton, "aimButton is null");
+    }
 
         //Called on Start() from CarController on playerPrefab setup.
         public void injectPlayerChildObjects(GameObject[] gameObjects)
