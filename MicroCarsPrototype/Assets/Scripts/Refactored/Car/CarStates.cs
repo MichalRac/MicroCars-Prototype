@@ -24,7 +24,7 @@ public class CarStates : MonoBehaviour
         set
         {
             _isLevelFinished = value;
-            if(_isLevelFinished)
+            if (_isLevelFinished)
             {
                 Debug.Log($"{gameObject.name} has finished the level");
             }
@@ -58,9 +58,9 @@ public class CarStates : MonoBehaviour
         set
         {
             _isTurn = value;
-            if(_isTurn)
+            if (_isTurn)
                 Debug.Log("Turn Started");
-            if(!_isTurn)
+            if (!_isTurn)
                 Debug.Log("Turn finished");
         }
     }
@@ -82,7 +82,10 @@ public class CarStates : MonoBehaviour
         yield return new WaitForSeconds(n);
         HitWall = false;
 
-        if (IsMoving)
+        while (IsMoving && movement.GetAngularVelocity > 5)
+            yield return null;
+
+        if(IsMoving)
             movement.StartCoroutine("MaintainVelocityRotation");
     }
 }

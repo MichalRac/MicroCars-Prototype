@@ -13,6 +13,7 @@ public class CarPhysicsMovement : MonoBehaviour
 
     private float _minMovingSpeed; // Value passed from CarPhysicsRoot TODO: Think of a better solution to passing this one value
     public float MinMovingSpeed { get => _minMovingSpeed; set => _minMovingSpeed = value; }
+    public float GetAngularVelocity { get => _rb2D.angularVelocity; }
 
 
     private void Awake()
@@ -50,6 +51,7 @@ public class CarPhysicsMovement : MonoBehaviour
         }
 
     }
+
 
     private void Update()
     {
