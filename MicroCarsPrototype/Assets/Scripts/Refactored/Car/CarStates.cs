@@ -8,6 +8,7 @@ public class CarStates : MonoBehaviour
     private bool _isMoving;
     private bool _isAiming;
     private bool _isTurn;
+    private int _turnsDone;
 
 
     public bool IsLevelFinished {
