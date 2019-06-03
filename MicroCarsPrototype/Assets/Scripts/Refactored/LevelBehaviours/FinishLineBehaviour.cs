@@ -7,9 +7,14 @@ public class FinishLineBehaviour : OnTouchAreaBehaviour
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
         base.OnTriggerEnter2D(collision);
-        GameObject other = collision.gameObject;
+        CarController other = collision.GetComponent<CarController>();
+        if (other == null)
+        {
+            Debug.Log("Something else passed finish line");
+            return;
+        }
 
-        if (other.GetComponent<CarController>())
+        if (!other.States.IsLevelFinished)
         {
 
         }

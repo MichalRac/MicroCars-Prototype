@@ -14,9 +14,10 @@ public class ParkingStopBehaviour : OnStopOnAreaBehaviour
             Debug.Log("Something else stopped on parking spot");
             return;
         }
-        else if (!other.States.IsMoving && other.States.IsTurn)
+        else if (other.States.IsTurn && !other.States.IsMoving  && !other.States.IsLevelFinished)
         {
             Debug.Log(collision.name + " stopped on " + gameObject.name);
+            other.States.IsLevelFinished = true;
         }
 
     }

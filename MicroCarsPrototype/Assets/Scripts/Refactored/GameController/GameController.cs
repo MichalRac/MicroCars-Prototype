@@ -7,8 +7,11 @@ public delegate void OnTurnFinishedCallback();
 
 public class GameController : MonoBehaviour
 {
-    public GameObject[] players;
-    public GameObject[] levels;
+    //Initializing the class
+    #region
+    [SerializeField] private GameObject[] players;
+    [SerializeField] private GameObject[] _levels;
+    [SerializeField] private MainUIBehaviour _mainUIBehaviour;
 
     private GameObject currentLevelId;
     private int currentPlayerId = 0;
@@ -16,14 +19,37 @@ public class GameController : MonoBehaviour
 
     OnTurnFinishedCallback onTurnFinishedCallback;
 
+    //Starting the level loop
     private void Start()
     {
-        onTurnFinishedCallback += startIdCarTurn;
-        startIdCarTurn();
+        onTurnFinishedCallback += StartIdCarTurn;
+        StartIdCarTurn();
+    }
+    #endregion
+
+    //Main level loop and finishing the game
+    #region
+    //Calling next available player (for now only one player, but it will be easy to expand)
+    public void StartIdCarTurn() //For now looping playerid[0] turn
+    {
+        if (!players[0].GetComponent<CarController>().States.IsLevelFinished)
+            players[0].GetComponent<CarController>().StartCarTurn(onTurnFinishedCallback);
+        else
+            OnLevelFinished();
     }
 
-    public void startIdCarTurn() //For now looping playerid[0] turn
+    public void OnLevelFinished()
     {
-        players[0].GetComponent<CarController>().StartCarTurn(onTurnFinishedCallback);
+        //Level completed popup show
+        _mainUIBehaviour.SetActiveLevelCompletedPupup(true);
     }
+    public IEnumerator StartNextCarTurn()
+    {
+        yield return null;
+        if (players[0].GetComponent<CarController>().States.IsLevelFinished)
+            OnLevelFinished();
+        else
+            players[0].GetComponent<CarController>().StartCarTurn(onTurnFinishedCallback);
+    }
+    #endregion
 }

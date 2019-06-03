@@ -4,53 +4,54 @@ using UnityEngine;
 
 public class CarStates : MonoBehaviour
 {
-    private bool isMoving;
-    private bool isAiming;
-    private bool isTurn;
+    private bool _isLevelFinished;
+    private bool _isMoving;
+    private bool _isAiming;
+    private bool _isTurn;
 
-    public bool IsMoving
-    {
-        get
-        {
-            return this.isMoving;
-        }
 
+    public bool IsLevelFinished {
+        get => _isLevelFinished;
         set
         {
-            this.isMoving = value;
-            Debug.Log(string.Format("The moving state changed to: {0}", isMoving));
+            _isLevelFinished = value;
+            if(_isLevelFinished)
+            {
+                Debug.Log($"{gameObject.name} has finished the level");
+            }
+        }
+    }
+    public bool IsMoving
+    {
+        get => _isMoving;
+        set
+        {
+            this._isMoving = value;
+            Debug.Log(string.Format("The moving state changed to: {0}", _isMoving));
         }
     }
 
     public bool IsAiming
     {
-        get
-        {
-            return isAiming;
-        }
-
+        get => _isAiming;
         set
         {
             if (IsMoving)
                 return;
-            isAiming = value;
+            _isAiming = value;
             Debug.Log("Aiming state changed to: " + IsAiming);
         }
     }
 
     public bool IsTurn
     {
-        get
-        {
-            return isTurn;
-        }
-
+        get => _isTurn;
         set
         {
-            isTurn = value;
-            if(isTurn)
+            _isTurn = value;
+            if(_isTurn)
                 Debug.Log("Turn Started");
-            if(!isTurn)
+            if(!_isTurn)
                 Debug.Log("Turn finished");
         }
     }

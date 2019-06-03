@@ -41,7 +41,7 @@ public class CameraController : MonoBehaviour {
         float optimalY = _focusPoint.y + _targetRB.velocity.y;
 
         Vector3 cameraOptimalPoint = new Vector3(optimalX, optimalY, -10.0f);
-        _cameraPoint.position = Vector3.MoveTowards(_cameraPoint.position, cameraOptimalPoint, cameraSpeed);
+        _cameraPoint.position = Vector3.MoveTowards(_cameraPoint.position, cameraOptimalPoint, cameraSpeed * Time.deltaTime);
 	}
 
     /*
