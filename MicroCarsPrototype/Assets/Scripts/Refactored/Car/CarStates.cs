@@ -48,6 +48,10 @@ public class CarStates : MonoBehaviour
         set
         {
             isTurn = value;
+            if(isTurn)
+                Debug.Log("Turn Started");
+            if(!isTurn)
+                Debug.Log("Turn finished");
         }
     }
 }

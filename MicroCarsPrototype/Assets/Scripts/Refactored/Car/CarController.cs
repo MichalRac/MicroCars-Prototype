@@ -13,6 +13,7 @@ public class CarController : MonoBehaviour
     private CarPhysicsRoot carPhysics;
     private AimingRoot aiming;
     private CarStates states;
+    public CarStates States { get => states; set => states = value; }
 
     [SerializeField]
     private GameObject car;
@@ -23,14 +24,15 @@ public class CarController : MonoBehaviour
     OnMovementFinishedCallback onMovementFinishedCallback;
     OnTurnFinishedCallback onTurnFinishedCallbackReference;
 
+
     private void Awake()
     {
         carPhysics = GetComponent<CarPhysicsRoot>();
         aiming = GetComponent<AimingRoot>();
-        states = GetComponent<CarStates>();
+        States = GetComponent<CarStates>();
         Debug.Assert(carPhysics, $"{typeof(CarPhysicsRoot)} is null");
         Debug.Assert(aiming, $"{typeof(AimingRoot)} is null");
-        Debug.Assert(states, $"{typeof(CarStates)} is null");
+        Debug.Assert(States, $"{typeof(CarStates)} is null");
     }
 
     void Start()
@@ -48,7 +50,7 @@ public class CarController : MonoBehaviour
     public void StartCarTurn(OnTurnFinishedCallback onTurnFinishedCallback)
     {
         onTurnFinishedCallbackReference = onTurnFinishedCallback;
-        states.IsTurn = true;
+        States.IsTurn = true;
 
         aiming.AimTurnStart();
     }
@@ -60,6 +62,7 @@ public class CarController : MonoBehaviour
 
     public void FinishCarTurn()
     {
+        States.IsTurn = false;
         onTurnFinishedCallbackReference();
     }
 }

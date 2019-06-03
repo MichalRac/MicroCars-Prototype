@@ -15,6 +15,7 @@ public class AimingPositioning : MonoBehaviour
     private GameObject _aimButton;
     [SerializeField] private GameObject _car;
     [SerializeField] private GameObject _aimArrow;
+    [SerializeField] private float _minAimPower = 1.0f;
 
     private GameObject _aimCanvas;
     public Vector2 defaultButtonPosition = new Vector2(0.0f, 0.0f);
@@ -46,7 +47,7 @@ public class AimingPositioning : MonoBehaviour
     {
         float aimPower = Vector2.Distance(_aimButton.transform.position, gameObject.transform.position);
 
-        if (aimPower < 1.0f)
+        if (aimPower < _minAimPower)
             return 0;
 
         return aimPower;
