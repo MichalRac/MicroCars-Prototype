@@ -16,12 +16,14 @@ public class GameController : MonoBehaviour
     private GameObject currentLevelId;
     private int currentPlayerId = 0;
     private bool placeholderAllPlayersFinished = false;
+    private bool _waitFrames;
 
     OnTurnFinishedCallback onTurnFinishedCallback;
 
     //Starting the level loop
     private void Start()
     {
+        _waitFrames = false;
         onTurnFinishedCallback += StartIdCarTurn;
         StartIdCarTurn();
     }
@@ -32,6 +34,12 @@ public class GameController : MonoBehaviour
     //Calling next available player (for now only one player, but it will be easy to expand)
     public void StartIdCarTurn() //For now looping playerid[0] turn
     {
+        StartCoroutine(FinishAllOperationsAndStartNextTurn());
+    }
+
+    public IEnumerator FinishAllOperationsAndStartNextTurn()
+    {
+        yield return null;
         if (players[0].GetComponent<CarController>().States.IsLevelFinished)
             OnLevelFinished();
         else
@@ -43,5 +51,6 @@ public class GameController : MonoBehaviour
         //Level completed popup show
         _mainUIBehaviour.SetActiveLevelCompletedPupup(true);
     }
+
     #endregion
 }
