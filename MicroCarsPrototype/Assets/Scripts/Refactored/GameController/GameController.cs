@@ -38,7 +38,6 @@ public class GameController : MonoBehaviour
     //Starting the level loop
     private void Start()
     {
-        mainCameraController.target = _currentPlayer;
         mainCameraController.switchTarget(_currentPlayer);
         _touchBehaviour.SetupTouchForPlayer(_currentPlayer);
         StartIdCarTurn();
