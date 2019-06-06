@@ -72,10 +72,16 @@ public class GameController : MonoBehaviour
     #endregion
 
     #region
-    public void getNextLevel()
+    public void NextLevel()
     {
+        Destroy(_currentLevel);
 
+        if (_currentLevelId == _levels.Length - 1)
+            _currentLevelId = 0;
+        else
+            _currentLevelId++;
+
+        _currentLevel = Instantiate(_levels[_currentLevelId]);
     }
-
     #endregion
 }
