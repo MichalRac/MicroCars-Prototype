@@ -6,20 +6,20 @@ namespace DigitalRubyShared
 {
     public class TouchBehaviour : MonoBehaviour
     {
-        public GameObject activePlayer;
         private CarPhysicsRoot carPhysics;
         private CarPhysicsBraking carBraking;
         private SwipeGestureRecognizer swipeGesture;
         private LongPressGestureRecognizer longPressGesture;
         //private readonly List<Vector3> swipeLines = new List<Vector3>();
 
-        private void Awake()
+        public void SetupTouchForPlayer(GameObject player)
         {
-            carPhysics = activePlayer.GetComponent<CarPhysicsRoot>();
-            carBraking = activePlayer.GetComponent<CarPhysicsBraking>();
+            carPhysics = player.GetComponent<CarPhysicsRoot>();
+            carBraking = player.GetComponent<CarPhysicsBraking>();
             Debug.Assert(carPhysics, $"{typeof(CarPhysicsRoot)} is null");
             Debug.Assert(carBraking, $"{typeof(CarPhysicsBraking)} is null");
         }
+
 
         void Start()
         {

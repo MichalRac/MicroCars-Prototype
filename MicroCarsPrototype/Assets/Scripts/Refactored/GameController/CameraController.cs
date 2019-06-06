@@ -21,8 +21,8 @@ public class CameraController : MonoBehaviour {
 	void Start ()
     {
         _cameraPoint = GetComponent<Transform>();
-        _targetRB = target.GetComponent<Rigidbody2D>();     // It will be called in update so it should be better to use a reference rather that getting component each frame
-        _aimButtonPositioning = target.GetComponent<AimingPositioning>();
+        //_targetRB = target.GetComponent<Rigidbody2D>();     // It will be called in update so it should be better to use a reference rather that getting component each frame
+        //_aimButtonPositioning = target.GetComponent<AimingPositioning>();
     }
 	
 	void Update ()
@@ -62,4 +62,11 @@ public class CameraController : MonoBehaviour {
         
     }
     */
+
+    public void switchTarget(GameObject newTarget)
+    {
+        target = newTarget;
+        _targetRB = target.GetComponent<Rigidbody2D>();
+        _aimButtonPositioning = target.GetComponent<AimingPositioning>();
+    }
 }
