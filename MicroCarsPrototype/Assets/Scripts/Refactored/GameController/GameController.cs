@@ -53,4 +53,11 @@ public class GameController : MonoBehaviour
     }
 
     #endregion
+
+    #region
+    public void getNextLevel()
+    {
+
+    }
+    #endregion
 }
