@@ -31,6 +31,7 @@ public class GameController : MonoBehaviour
 
         _currentLevel = Instantiate(_levels[_currentLevelId]);
         _currentPlayer = Instantiate(_players[0]) as GameObject;
+        MovePlayerToStartPos(_currentPlayer);
 
         onTurnFinishedCallback += StartIdCarTurn;
     }
@@ -81,6 +82,19 @@ public class GameController : MonoBehaviour
             _currentLevelId++;
 
         _currentLevel = Instantiate(_levels[_currentLevelId]);
+        _currentPlayer.GetComponent<CarStates>().IsLevelFinished = false;
+        MovePlayerToStartPos(_currentPlayer);
+        StartCoroutine(FinishAllOperationsAndStartNextTurn());
+    }
+
+    public void MovePlayerToStartPos(GameObject player)
+    {
+        player.transform.position = GetStartPosition();
+    }
+
+    public Vector3 GetStartPosition()
+    {
+        return _currentLevel.transform.Find("Points/start_pos").transform.position;
     }
     #endregion
 }

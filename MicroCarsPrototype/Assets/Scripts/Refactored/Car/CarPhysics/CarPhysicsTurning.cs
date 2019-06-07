@@ -81,7 +81,7 @@ public class CarPhysicsTurning : MonoBehaviour
         while (Quaternion.Angle(gameObject.transform.rotation, targetRotation) > 0.001f)
         {
 
-            float deltaAngle = angleDifference * (Time.fixedDeltaTime / turnDurationSec);
+            float deltaAngle = angleDifference * (Time.deltaTime / turnDurationSec);
             gameObject.transform.rotation = Quaternion.RotateTowards(gameObject.transform.rotation, targetRotation, deltaAngle);
             yield return new WaitForFixedUpdate();
 

@@ -243,7 +243,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6398353337988192930}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.04, y: 2.22, z: 0}
+  m_LocalPosition: {x: -2.04, y: 2.54, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 982246619694500884}
@@ -382,7 +382,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3661220577660798486}
   m_Layer: 0
-  m_Name: Level2
+  m_Name: Level 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -496,7 +496,6 @@ GameObject:
   - component: {fileID: 8141525509240094675}
   - component: {fileID: 9044081705271455693}
   - component: {fileID: 2750175267899212068}
-  - component: {fileID: 3177131542930021382}
   - component: {fileID: 8070140810120163637}
   m_Layer: 0
   m_Name: Ground
@@ -1905,21 +1904,6 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
---- !u!114 &3177131542930021382
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7338475433387298045}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2126cdff779125439a75f788fd6dc39, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  modifier: 0.8
-  playerCarPhysics: {fileID: 6844897879987237189, guid: 89657c702d4e2b34e85463bc9b10a6f5,
-    type: 3}
 --- !u!19719996 &8070140810120163637
 TilemapCollider2D:
   m_ObjectHideFlags: 0
@@ -2800,7 +2784,6 @@ GameObject:
   - component: {fileID: 2511647899873045870}
   - component: {fileID: 1137649639526966605}
   - component: {fileID: 2965679598579031863}
-  - component: {fileID: 870333328340727311}
   - component: {fileID: 8034716603141825102}
   m_Layer: 0
   m_Name: Road
@@ -3029,21 +3012,6 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
---- !u!114 &870333328340727311
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7919942609276421408}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2126cdff779125439a75f788fd6dc39, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  modifier: 1.25
-  playerCarPhysics: {fileID: 6844897879987237189, guid: 89657c702d4e2b34e85463bc9b10a6f5,
-    type: 3}
 --- !u!19719996 &8034716603141825102
 TilemapCollider2D:
   m_ObjectHideFlags: 0
@@ -3192,6 +3160,7 @@ GameObject:
   - component: {fileID: 8780423559935343171}
   - component: {fileID: 2000835398239198448}
   - component: {fileID: 6891103445484375936}
+  - component: {fileID: 2475035016420961381}
   m_Layer: 0
   m_Name: finish_area
   m_TagString: Untagged
@@ -3207,7 +3176,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8538219570204680337}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.18, y: -5.78, z: 0}
+  m_LocalPosition: {x: 2.19, y: -5.88, z: 0}
   m_LocalScale: {x: 2.05, y: 1.2875, z: 1}
   m_Children: []
   m_Father: {fileID: 982246619694500884}
@@ -3287,3 +3256,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2475035016420961381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8538219570204680337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f16acd0753053ae4981962d02d5d0396, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

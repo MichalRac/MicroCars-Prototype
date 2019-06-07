@@ -29,7 +29,8 @@ public class CarPhysicsMovement : MonoBehaviour
     public void Move(float moveForce)
     {
         Vector2 moveForceVector = new Vector2(0.0f, moveForce * _carSpeed);
-        _rb2D.AddRelativeForce(moveForceVector);
+        if(_rb2D.velocity.magnitude < _carMaxVelocityMagnitude * 0.99)
+            _rb2D.AddRelativeForce(moveForceVector);
 
         StartCoroutine(_carDynamicDrag.StartDynamicDrag());
 

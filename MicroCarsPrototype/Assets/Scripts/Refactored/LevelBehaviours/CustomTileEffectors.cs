@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CustomTileEffectors : MonoBehaviour
 {
-    
     public GameObject player;
     private CarPhysicsRoot _carPhysicsRoot;
     private CarPhysicsTurning _carTurning;
@@ -16,14 +15,13 @@ public class CustomTileEffectors : MonoBehaviour
 
 
 
-    // Start is called before the first frame update
-    void Start()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
+        player = collision.gameObject;
         _carTurning = player.GetComponent<CarPhysicsTurning>();
         _carPhysicsRoot = player.GetComponent<CarPhysicsRoot>();
     }
 
-    
     private void OnTriggerStay2D(Collider2D collision)
     {
         Debug.Log("TileEffector TriggerEnter");
