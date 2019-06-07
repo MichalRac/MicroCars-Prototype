@@ -5,53 +5,59 @@ using UnityEngine;
 [RequireComponent(typeof(AimingPositioning))]
 public class AimingRoot : MonoBehaviour
 {
-    
-    [HideInInspector]
-    private AimingPositioning positioning;
-    private CarStates states;
+    //Setting up the class
+    #region
+        [HideInInspector]
+        private AimingPositioning _positioning;
+        private CarStates _states;
 
-    OnAimFinishedCallback onAimFinishedCallbackReference;
+        OnAimFinishedCallback onAimFinishedCallbackReference;
 
-    private void Start()
-    {
-        positioning = GetComponent<AimingPositioning>();
-        states = GetComponent<CarStates>();
-    }
+        private void Start()
+        {
+            _positioning = GetComponent<AimingPositioning>();
+            _states = GetComponent<CarStates>();
+        }
+    #endregion
 
-    public void OnAimHold()
-    {
-        positioning.MoveAimToPointer();
-    }
+    //Start, Duration and Ending of player's aiming turn
+    #region
+        public void AimTurnStart()
+        {
+            _states.IsAiming = true;
+            _positioning.ShowAimButton();
 
-    public void OnAimRelease()
-    {
-        positioning.onAimRelease();
-        states.IsAiming = false;
-    }
+            StartCoroutine(aimingLifetime());
 
-    // AimStart
-    public void AimStart()
-    {
-        states.IsAiming = true;
-        positioning.ShowAimButton();
+        }
 
-        StartCoroutine(aimingLifetime());
-        
-    }
+        //AimDuration Right now does nothing, but there are many possibilities to add here (particles, sound etc.)
+        private IEnumerator aimingLifetime()
+        {
+            while (_states.IsAiming)
+                yield return null;
 
-    //AimDuration
-    private IEnumerator aimingLifetime()
-    { 
-        while(states.IsAiming)
-            yield return null;
+            AimEnd();
 
-        AimEnd();
+        }
 
-    }
-    
-    //AimEnd + Callback
-    private void AimEnd()
-    {
-    }
+        // For Aiming UI EventTrigger
+        public void OnAimHold()
+        {
+            _positioning.OnAimHoldOperations();
+        }
 
+        // For Aiming UI EventTrigger
+        public void OnAimRelease()
+        {
+            _positioning.OnAimReleaseOperations();
+            _states.IsAiming = false;
+        }
+
+        //AimEnd Right now does nothing, but there are many possibilities to add here (particles, sound etc.)
+        //Because the turn does not end until we stop movement, so we don't call CarController yet - it will be called from CarMovement class
+        private void AimEnd()
+        {
+        }
+    #endregion
 }

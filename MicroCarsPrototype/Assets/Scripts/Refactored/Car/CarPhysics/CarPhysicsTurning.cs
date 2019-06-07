@@ -14,37 +14,62 @@ public class CarPhysicsTurning : MonoBehaviour
     private Rigidbody2D rb2D;
 
 
-    private void Start()
+    private void Awake()
     {
         states = GetComponent<CarStates>();
         movement = GetComponent<CarPhysicsMovement>();
         rb2D = GetComponent<Rigidbody2D>();
+        Debug.Assert(states, $"{typeof(CarStates)} is null");
+        Debug.Assert(movement, $"{typeof(CarPhysicsMovement)} is null");
+        Debug.Assert(rb2D, $"{typeof(Rigidbody2D)} is null");
     }
 
 
-    public void SwipeAction(string direction, float swipeLenght)
+    public void SwipeAction(string direction, float swipeLenght, Vector3 swipeVector)
     {
         Debug.Log(states.IsMoving);
         if (states.IsMoving == false)
             return;
 
+        
         if (direction == "left")
         {
             rb2D.AddTorque(turnPower /* * (swipeLenght * turnSwipeResponsivness) */);
             StartCoroutine(movement.MaintainVelocityRotation());
         }
-
         else if (direction == "right")
         {
             rb2D.AddTorque(-turnPower /* * (swipeLenght * turnSwipeResponsivness) */);
             StartCoroutine(movement.MaintainVelocityRotation());
         }
-
+        else if (direction == "any")
+        {
+            
+            if(Vector2.SignedAngle(swipeVector.normalized, rb2D.velocity.normalized) > 0)
+            {
+                rb2D.AddTorque(turnPower * (swipeLenght * turnSwipeResponsivness));
+                StartCoroutine(movement.MaintainVelocityRotation());
+            }
+            else if(Vector2.SignedAngle(swipeVector.normalized, rb2D.velocity.normalized) < 0)
+            {
+                rb2D.AddTorque(-turnPower * (swipeLenght * turnSwipeResponsivness));
+                StartCoroutine(movement.MaintainVelocityRotation());
+            }
+        }
+        else
+        {
+            Debug.Log($"Unknown direction passed: {direction}");
+        }
     }
 
-    public void TriggerCustomTurnEffect(float turnDurationSec, float targetAngle)
+    public void TurnOnCustomTurnEffect(float turnDurationSec, float targetAngle)
     {
         StartCoroutine(CustomTurnEffect(turnDurationSec, targetAngle));
+    }
+
+    public void TurnOffCustomTurnEffect()
+    {
+        this.StopAllCoroutines();
     }
 
     public IEnumerator CustomTurnEffect(float turnDurationSec, float targetAngle)
@@ -52,15 +77,11 @@ public class CarPhysicsTurning : MonoBehaviour
         Quaternion targetRotation = Quaternion.Euler(0.0f, 0.0f, targetAngle);
         float angleDifference = Quaternion.Angle(gameObject.transform.rotation, targetRotation);
 
-        float timeElapsed = 0.0f;
 
         while (Quaternion.Angle(gameObject.transform.rotation, targetRotation) > 0.001f)
         {
 
-            Debug.Log(timeElapsed);
-            timeElapsed += Time.fixedDeltaTime;
-
-            float deltaAngle = angleDifference * (Time.fixedDeltaTime / turnDurationSec);
+            float deltaAngle = angleDifference * (Time.deltaTime / turnDurationSec);
             gameObject.transform.rotation = Quaternion.RotateTowards(gameObject.transform.rotation, targetRotation, deltaAngle);
             yield return new WaitForFixedUpdate();
 
