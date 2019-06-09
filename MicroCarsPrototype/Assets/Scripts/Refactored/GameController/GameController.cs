@@ -56,7 +56,7 @@ public class GameController : MonoBehaviour
 
     public IEnumerator FinishAllOperationsAndStartNextTurn()
     {
-        yield return null;
+        yield return new WaitForSeconds(0.1f);
         if (_currentPlayer.GetComponent<CarController>().States.IsLevelFinished)
             OnLevelFinished();
         else
