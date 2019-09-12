@@ -53,6 +53,20 @@ public class CarPhysicsMovement : MonoBehaviour
 
     }
 
+    public IEnumerator AngularVelocityMatchFloatOverTime(float targetFloat, float actionDuration)
+    {
+        StopCoroutine(MaintainVelocityRotation());
+        float difference = Mathf.Abs(_rb2D.angularVelocity - targetFloat);
+
+        while(_rb2D.angularVelocity == targetFloat)
+        {
+            _rb2D.angularVelocity = Mathf.MoveTowards(_rb2D.angularVelocity, targetFloat, difference * (Time.deltaTime / actionDuration));
+            yield return null;
+        }
+
+        if(_rb2D.velocity.magnitude > MinMovingSpeed)
+            StartCoroutine(MaintainVelocityRotation());
+    }
 
     private void Update()
     {
