@@ -81,7 +81,7 @@ namespace DigitalRubyShared
         /// </summary>
         public LongPressGestureRecognizer()
         {
-            MinimumDurationSeconds = 0.075f;
+            MinimumDurationSeconds = 0.125f;
             ThresholdUnits = 0.20f;
             ClearTrackedTouchesOnEndOrFail = true;
         }
